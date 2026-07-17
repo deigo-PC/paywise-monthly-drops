@@ -100,6 +100,16 @@ function Index() {
               Marketing Hub
             </a>
           </Button>
+          <Button asChild variant="destructive" className="animate-subtle-pulse">
+            <a
+              href="/PayWise_Onboarding-Research-v2.5.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              First Transaction in 48hrs Research
+            </a>
+          </Button>
         </div>
       </section>
 

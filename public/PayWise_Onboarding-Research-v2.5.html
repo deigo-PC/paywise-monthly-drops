@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayWise — Onboarding Research v2.5</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g1: #69CE57; --g2: #5FAD4A; --g3: #5BA246; --g4: #4E893B;
+  --b1: #1B92CE; --b2: #1A6CA8; --b3: #195A9E; --b4: #04507F;
+  --dark: #141414; --ink: #1A1A18; --paper: #F5F3EE;
+  --white: #FFFFFF; --muted: #6B6861; --rule: #E4E0D7;
+  --ui: 'Poppins', sans-serif;
+  --mono: 'DM Mono', monospace;
+  --kl: 'Kalam', cursive;
+  --sidebar-w: 240px;
+  --header-h: 58px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:15px;scroll-behavior:smooth;}
+body{font-family:var(--ui);background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--header-h);background:var(--dark);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.topbar-logo{display:flex;align-items:center;gap:10px;}
+.topbar-mark{
+  width:30px;height:30px;border-radius:7px;
+  background:linear-gradient(135deg,var(--g2),var(--b3));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:13px;color:#fff;
+}
+.topbar-name .pay{color:var(--g1);font-weight:700;font-size:15px;}
+.topbar-name .wise{color:var(--b1);font-weight:700;font-size:15px;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.tb-chip{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 10px;border-radius:3px;
+}
+.tb-green{background:rgba(105,206,87,.12);border:1px solid rgba(105,206,87,.25);color:var(--g1);}
+.tb-muted{color:rgba(255,255,255,.25);font-family:var(--mono);font-size:10px;letter-spacing:.06em;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  position:fixed;top:var(--header-h);left:0;bottom:0;
+  width:var(--sidebar-w);background:var(--dark);
+  overflow-y:auto;z-index:900;
+  border-right:1px solid rgba(255,255,255,.06);
+  scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent;
+}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px;}
+.sb-group{padding:18px 0 8px;}
+.sb-group-label{
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.2);padding:0 20px 10px;display:block;
+}
+.sb-link{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 20px;font-size:12px;font-weight:500;
+  color:rgba(255,255,255,.42);transition:all .18s;
+  border-left:2px solid transparent;cursor:pointer;
+}
+.sb-link:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.03);}
+.sb-link.active{color:#fff;border-left-color:var(--g1);background:rgba(105,206,87,.06);}
+.sb-link .sb-n{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.18);min-width:20px;}
+.sb-link.active .sb-n{color:var(--g1);}
+.sb-divider{height:1px;background:rgba(255,255,255,.06);margin:8px 20px;}
+.sb-meta{padding:14px 20px;}
+.sb-warn{
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);
+  border-radius:6px;padding:10px 12px;
+}
+.sb-warn-label{font-family:var(--mono);font-size:9px;color:#EF4444;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.sb-warn p{font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;margin:0;}
+
+/* ── MAIN ── */
+.main{
+  margin-left:var(--sidebar-w);
+  margin-top:var(--header-h);
+  min-height:calc(100vh - var(--header-h));
+}
+
+/* ── HERO ── */
+.hero{
+  background:var(--dark);padding:64px 60px 56px;
+  position:relative;overflow:hidden;
+  scroll-margin-top:var(--header-h);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 65% at 92% 8%, rgba(105,206,87,.1) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 55% at 5% 88%, rgba(27,146,206,.1) 0%, transparent 55%);
+}
+.hero-ring{
+  position:absolute;border-radius:50%;
+  border:60px solid rgba(105,206,87,.07);
+  pointer-events:none;
+}
+.hr1{width:560px;height:560px;top:-200px;right:-100px;}
+.hr2{width:300px;height:300px;bottom:-100px;left:40px;border-color:rgba(27,146,206,.08);}
+.hero-inner{position:relative;}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(105,206,87,.7);margin-bottom:20px;display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::after{content:'';flex:1;max-width:60px;height:1px;background:rgba(105,206,87,.3);}
+.hero-title{
+  font-size:clamp(36px,5vw,62px);font-weight:900;line-height:.98;
+  color:#fff;margin-bottom:10px;
+}
+.hero-title .pay{color:var(--g1);}
+.hero-title .wise{color:var(--b1);}
+.hero-subtitle{font-size:clamp(18px,2.5vw,26px);font-weight:300;color:rgba(255,255,255,.45);letter-spacing:-.01em;margin-bottom:28px;}
+.hero-deck{
+  max-width:560px;font-size:15.5px;color:rgba(255,255,255,.55);
+  line-height:1.72;border-left:2px solid var(--g2);padding-left:20px;
+}
+.hero-deck strong{color:rgba(255,255,255,.85);}
+.hero-meta{
+  display:flex;gap:28px;flex-wrap:wrap;
+  padding-top:32px;margin-top:32px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.hero-meta-item{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.12em;}
+.hero-meta-item strong{display:block;font-family:var(--ui);font-size:12.5px;font-weight:600;color:rgba(255,255,255,.65);text-transform:none;letter-spacing:0;margin-top:3px;}
+
+/* ── SECTIONS ── */
+.section{
+  max-width:880px;margin:0 auto;
+  padding:60px 52px;
+  border-bottom:1px solid var(--rule);
+  scroll-margin-top:calc(var(--header-h) + 8px);
+}
+.section:last-of-type{border-bottom:none;}
+
+/* ── SECTION HEADERS ── */
+.sec-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--rule);}
+.sec-badge{
+  min-width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;flex-shrink:0;
+}
+.sec-titles{}
+.sec-tag{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px;}
+.sec-h2{font-size:clamp(20px,2.5vw,28px);font-weight:800;line-height:1.1;color:var(--b4);}
+.sec-h2 em{font-style:italic;font-family:var(--kl);font-weight:700;color:var(--g2);font-size:1.08em;}
+.sec-deck{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.6;max-width:500px;}
+
+/* ── TYPOGRAPHY ── */
+p{font-size:14px;color:#2a2a26;line-height:1.75;margin-bottom:14px;}
+p:last-child{margin:0;}
+strong{color:var(--ink);}
+h3{font-size:16px;font-weight:700;color:var(--b4);margin:28px 0 10px;}
+h4{font-size:14px;font-weight:700;color:var(--b4);margin-bottom:7px;}
+ul,ol{padding-left:20px;margin-bottom:14px;}
+li{font-size:13.5px;color:#2a2a26;line-height:1.7;margin-bottom:4px;}
+
+/* ── CALLOUTS ── */
+.callout{
+  border-left:3px solid var(--g2);background:rgba(95,173,74,.07);
+  padding:15px 20px;border-radius:0 8px 8px 0;margin:16px 0;
+  font-size:13.5px;line-height:1.65;
+}
+.callout.blue{border-color:var(--b2);background:rgba(27,146,206,.06);}
+.callout.warn{border-color:#F59E0B;background:#FFFBEB;}
+.callout.danger{border-color:#EF4444;background:#FEF2F2;}
+.callout.dark{background:rgba(105,206,87,.06);border-color:var(--g1);}
+.cl-lbl{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:600;display:block;margin-bottom:5px;
+}
+.callout .cl-lbl{color:var(--g3);}
+.callout.blue .cl-lbl{color:var(--b2);}
+.callout.warn .cl-lbl{color:#92400E;}
+.callout.danger .cl-lbl{color:#B91C1C;}
+.callout.dark .cl-lbl{color:var(--g1);}
+
+/* ── DARK HIGHLIGHT BOXES ── */
+.hl{
+  background:var(--dark);border-radius:12px;padding:26px 30px;margin:16px 0;
+  position:relative;overflow:hidden;
+}
+.hl::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 45% 60% at 95% 5%, rgba(105,206,87,.08) 0%, transparent 55%);
+}
+.hl-lbl{position:relative;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--g1);opacity:.8;margin-bottom:10px;}
+.hl p{position:relative;color:rgba(255,255,255,.82);font-size:14.5px;margin:0;line-height:1.72;}
+.hl strong{color:#fff;}
+
+/* ── PROBLEM + RECOMMENDATION CARDS ── */
+.prob-rec{background:var(--white);border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin:18px 0;}
+.prob-head{
+  padding:16px 22px;display:flex;align-items:flex-start;gap:12px;
+  border-bottom:1px solid var(--rule);
+  background:#FAFAF6;
+}
+.prob-num{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 9px;border-radius:20px;flex-shrink:0;margin-top:2px;
+}
+.prob-head h4{font-size:14px;font-weight:700;color:var(--b4);line-height:1.35;flex:1;margin:0;}
+.prob-body{display:grid;grid-template-columns:1fr 1fr;}
+.pb-half{padding:18px 22px;}
+.pb-half:first-child{border-right:1px solid var(--rule);}
+.pb-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.pb-half:first-child .pb-lbl{color:var(--b2);}
+.pb-half:last-child .pb-lbl{color:var(--g3);}
+.pb-half p{font-size:13px;color:#2e2e28;line-height:1.65;margin-bottom:8px;}
+
+/* ── DEPENDENCY FLAGS ── */
+.dep-flag{
+  display:flex;align-items:flex-start;gap:12px;
+  background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;
+  padding:14px 18px;margin:14px 0;font-size:13px;line-height:1.65;
+}
+.dep-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.dep-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#92400E;margin-bottom:5px;}
+
+/* ── PRIORITY LIST ── */
+.priority-list{display:flex;flex-direction:column;gap:3px;margin:16px 0;}
+.prio-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:14px 18px;
+  transition:border-color .18s;
+}
+.prio-item:hover{border-color:var(--g2);}
+.prio-num{
+  min-width:32px;height:32px;border-radius:7px;font-weight:800;font-size:13px;
+  display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;
+}
+.prio-content h4{font-size:13.5px;font-weight:700;color:var(--b4);margin-bottom:3px;}
+.prio-content p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.6;}
+.prio-tag{
+  margin-left:auto;font-family:var(--mono);font-size:9px;
+  padding:3px 9px;border-radius:20px;flex-shrink:0;align-self:flex-start;
+}
+
+/* ── FRICTION TABLE ── */
+.friction-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0;}
+.friction-table thead tr{background:var(--dark);}
+.friction-table th{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);padding:11px 14px;text-align:left;
+}
+.friction-table td{padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;}
+.friction-table tr:last-child td{border-bottom:none;}
+.friction-table tr:hover td{background:rgba(105,206,87,.02);}
+.fnum{
+  font-family:var(--mono);font-size:11px;font-weight:600;
+  width:24px;height:24px;border-radius:5px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:#FEF2F2;color:#B91C1C;
+}
+.fstatus{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:20px;background:#FEF2F2;color:#B91C1C;}
+
+/* ── QUOTE/EVIDENCE ── */
+.ev{background:var(--dark);border-radius:8px;padding:14px 18px;margin:12px 0;position:relative;overflow:hidden;}
+.ev::before{content:'"';font-family:var(--kl);font-size:60px;color:var(--g1);opacity:.14;position:absolute;top:-8px;left:10px;line-height:1;}
+.ev p{font-size:12.5px;color:rgba(255,255,255,.78);font-style:italic;line-height:1.65;padding-left:6px;margin:0;}
+.ev-src{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.08em;margin-top:7px;padding-left:6px;}
+
+/* ── GRID ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+
+/* ── STAT BOXES ── */
+.stats-row{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0;}
+.stat{
+  flex:1;min-width:110px;background:var(--b4);color:#fff;
+  border-radius:10px;padding:18px 16px;text-align:center;
+}
+.stat .num{font-weight:800;font-size:24px;color:var(--g1);display:block;line-height:1;}
+.stat .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:5px;display:block;}
+
+/* ── CARDS ── */
+.card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:20px;}
+.card-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.card h4{font-size:13.5px;font-weight:700;color:var(--b4);margin-bottom:6px;}
+.card p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.6;}
+
+/* ── ADAPTATION CARDS ── */
+.adapt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+.adapt-card{
+  background:var(--white);border:1px solid var(--rule);
+  border-radius:10px;padding:20px;border-top:3px solid;
+}
+.adapt-card:nth-child(1){border-top-color:var(--g2);}
+.adapt-card:nth-child(2){border-top-color:var(--b1);}
+.adapt-card:nth-child(3){border-top-color:var(--g4);}
+.adapt-card:nth-child(4){border-top-color:var(--b3);}
+.adapt-card:nth-child(5){border-top-color:#F97316;}
+.adapt-num{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.adapt-card h4{font-size:13.5px;font-weight:700;color:var(--b4);margin-bottom:6px;}
+.adapt-card p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.6;}
+
+/* ── DIVIDER ── */
+.sec-div{height:1px;background:var(--rule);margin:28px 0;}
+.sub-h{
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin:24px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sub-h::after{content:'';flex:1;height:1px;background:var(--rule);}
+
+/* ── CONCLUSION BOX ── */
+.conclusion{
+  background:var(--dark);border-radius:14px;padding:32px 36px;margin:20px 0;
+  position:relative;overflow:hidden;
+}
+.conclusion::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 40% 50% at 97% 5%, rgba(105,206,87,.09) 0%, transparent 55%);
+}
+.conclusion-lbl{position:relative;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--g1);margin-bottom:12px;}
+.conclusion h3{position:relative;font-size:18px;font-weight:700;color:#fff;margin-bottom:14px;margin-top:0;}
+.conclusion p{position:relative;color:rgba(255,255,255,.72);font-size:14px;margin-bottom:10px;line-height:1.72;}
+.conclusion strong{color:#fff;}
+
+/* ── FOOTER ── */
+.doc-footer{
+  text-align:center;padding:36px 52px;
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  letter-spacing:.08em;text-transform:uppercase;
+  border-top:1px solid var(--rule);background:var(--white);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  :root{--sidebar-w:0px;}
+  .sidebar{transform:translateX(-240px);transition:transform .3s;width:240px;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .section{padding:40px 24px;}
+  .hero{padding:48px 24px 44px;}
+  .prob-body{grid-template-columns:1fr;}
+  .pb-half:first-child{border-right:none;border-bottom:1px solid var(--rule);}
+  .g2,.g3,.adapt-grid{grid-template-columns:1fr;}
+  .stats-row{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <div class="topbar-mark">PW</div>
+    <div class="topbar-name"><span class="pay">Pay</span><span class="wise">Wise</span></div>
+  </div>
+  <div class="topbar-right">
+    <span class="tb-chip tb-green">Onboarding Research v2.5</span>
+    <span class="tb-muted">May 2026 · Confidential</span>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-group">
+    <span class="sb-group-label">Navigation</span>
+    <a class="sb-link" href="#hero" onclick="setActive(this)"><span class="sb-n">00</span>Overview</a>
+    <a class="sb-link" href="#s1" onclick="setActive(this)"><span class="sb-n">01</span>Objective &amp; Scope</a>
+    <a class="sb-link" href="#s2" onclick="setActive(this)"><span class="sb-n">02</span>The Aha Moment</a>
+    <a class="sb-link" href="#s3" onclick="setActive(this)"><span class="sb-n">03</span>New Users</a>
+    <a class="sb-link" href="#s4" onclick="setActive(this)"><span class="sb-n">04</span>Lapsed Users</a>
+    <a class="sb-link" href="#s5" onclick="setActive(this)"><span class="sb-n">05</span>Referral Mechanics</a>
+    <a class="sb-link" href="#s6" onclick="setActive(this)"><span class="sb-n">06</span>Agent Onboarding</a>
+    <a class="sb-link" href="#s7" onclick="setActive(this)"><span class="sb-n">07</span>Friction Points</a>
+    <a class="sb-link" href="#s8" onclick="setActive(this)"><span class="sb-n">08</span>Priorities</a>
+    <a class="sb-link" href="#s9" onclick="setActive(this)"><span class="sb-n">09</span>T&amp;T Adaptation</a>
+    <a class="sb-link" href="#s10" onclick="setActive(this)"><span class="sb-n">10</span>PayWise Local</a>
+    <a class="sb-link active" href="#s11" onclick="setActive(this)"><span class="sb-n">11</span>Conclusion</a>
+  </div>
+  <div class="sb-divider"></div>
+  <div class="sb-group">
+    <span class="sb-group-label">Key Stats</span>
+    <a class="sb-link" href="#s1"><span class="sb-n">68%</span>Fintech onboarding abandon</a>
+    <a class="sb-link" href="#s2"><span class="sb-n">5</span>User types · Aha moments</a>
+    <a class="sb-link" href="#s5"><span class="sb-n">#3</span>Referral trigger (txn)</a>
+    <a class="sb-link" href="#s10"><span class="sb-n">PW Local</span>Dual-sided incentive</a>
+  </div>
+  <div class="sb-divider"></div>
+  <div class="sb-meta">
+    <div class="sb-warn">
+      <div class="sb-warn-label">⚠ Critical Dependency</div>
+      <p>Push notification &amp; SMS infrastructure required before any activation campaign can scale.</p>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-ring hr1"></div>
+  <div class="hero-ring hr2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Research Document</div>
+    <div class="hero-title"><span class="pay">Pay</span><span class="wise">Wise</span></div>
+    <div class="hero-subtitle">Onboarding Research v2.5</div>
+    <div class="hero-deck">
+      First Transaction Within 48 Hours — this investigation synthesises the Genesis Report, Buyer Psychology Report, Master Strategy Document, Channel Acquisition Map, and external fintech research to produce <strong>concrete, T&amp;T-specific recommendations</strong> for closing the activation gap.
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">Version<strong>v2.5</strong></div>
+      <div class="hero-meta-item">Date<strong>May 2026</strong></div>
+      <div class="hero-meta-item">Status<strong>Confidential</strong></div>
+      <div class="hero-meta-item">Focus<strong>First Transaction · Per-User-Type Aha Moment</strong></div>
+      <div class="hero-meta-item">Scope<strong>New Users · Lapsed Users · Agents · PayWise Local</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1 — OBJECTIVE & SCOPE -->
+<div class="section" id="s1">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,var(--g2),var(--g4));">01</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:var(--g2);">Research Overview</div>
+      <div class="sec-h2">Objective &amp; <em>Scope</em></div>
+      <div class="sec-deck">What this document covers and how it was built.</div>
+    </div>
+  </div>
+
+  <p>Understand which onboarding mechanics work best to help PayWise users reach their first transaction within 48 hours of registration. This brief expands the Genesis Report's Activation Gap findings into concrete, T&amp;T-specific recommendations for new users and existing users who have registered but not transacted recently.</p>
+
+  <div class="hl">
+    <div class="hl-lbl">Source Synthesis</div>
+    <p>This summary synthesises the Genesis Report, the PayWise knowledge base, the Buyer Psychology Report, the Master Strategy Document, the Channel Acquisition Map, and external fintech onboarding research. Recommendations are shaped for a product operating in Trinidad &amp; Tobago's trust-first, cash-heavy market. <strong>Where a recommendation depends on infrastructure not yet in place (push notifications, SMS), that dependency is flagged explicitly.</strong></p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><span class="num">68%</span><span class="lbl">Fintech onboarding abandonment globally</span></div>
+    <div class="stat"><span class="num">50%</span><span class="lbl">Finance apps deleted within 30 days</span></div>
+    <div class="stat"><span class="num">+50%</span><span class="lbl">First-deposit rate improvement from better UX (Bain)</span></div>
+    <div class="stat"><span class="num">48h</span><span class="lbl">Critical activation window</span></div>
+  </div>
+</div>
+
+
+
+
+<!-- SECTION 2 — AHA MOMENT -->
+<div class="section" id="s2">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,#7C3AED,#5B21B6);">02</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:#7C3AED;">The Aha Moment</div>
+      <div class="sec-h2">Specific Per <em>User Type</em></div>
+      <div class="sec-deck">The first transaction goal is not generic — defining a precise aha moment per user type matters more than covering all possible first actions equally.</div>
+    </div>
+  </div>
+
+  <p>Getting a user to one specific, high-value first action within 48 hours is what predicts retention — not exposure to the full feature set. The strongest aha moment candidates share three qualities: they are <strong>non-discretionary</strong> (the need exists independently of PayWise), they produce an <strong>immediate tangible outcome</strong> the user can see and feel, and they create a <strong>recurring loop</strong> — a reason to return next month without being prompted.</p>
+
+  <div style="overflow-x:auto;">
+  <table class="friction-table">
+    <thead>
+      <tr>
+        <th>User Type</th>
+        <th>Their Aha Moment</th>
+        <th>Why It Works</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Everyday Consumer</strong></td>
+        <td>First bill paid — receipt confirmed</td>
+        <td>Non-discretionary, monthly, immediate proof the app works</td>
+      </tr>
+      <tr>
+        <td><strong>Small Business Owner</strong></td>
+        <td>First card payment received</td>
+        <td>Solves the pain that drove signup; visible revenue impact</td>
+      </tr>
+      <tr>
+        <td><strong>Bill Payment Agent</strong></td>
+        <td>First customer transaction processed + commission visible</td>
+        <td>Proves the income model is real before the deposit feels risky</td>
+      </tr>
+      <tr>
+        <td><strong>Diaspora Sender</strong></td>
+        <td>Family confirms receipt of transfer</td>
+        <td>Emotional stakes are highest here — success = deep trust earned</td>
+      </tr>
+      <tr>
+        <td><strong>E-Commerce Merchant</strong></td>
+        <td>First checkout completed via PayWise</td>
+        <td>Validates integration and ends dual-platform complexity</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <span class="cl-lbl">Practical Implication</span>
+    Onboarding should not route all new users through the same first action. The product should detect or ask which track the user is on at signup — consumer, business, or agent — and surface the aha moment relevant to that track immediately. A business owner being prompted to pay a utility bill first is a mismatch that will cost the activation.
+  </div>
+
+  <p>For the consumer track specifically — which is the largest segment and the one most directly addressed by the 48-hour activation window — <strong>the first successful bill payment remains the strongest aha moment</strong> and the primary recommendation throughout the new user and lapsed user sections below. All other tracks should apply the same progressive disclosure logic to their own equivalent first action.</p>
+</div>
+
+<!-- SECTION 3 — NEW USERS -->
+<div class="section" id="s3">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,#D32F2F,#B71C1C);">03</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:#D32F2F;">New User Onboarding</div>
+      <div class="sec-h2">Problems &amp; <em>Recommendations</em></div>
+      <div class="sec-deck">Five friction points blocking first-time users from completing a bill payment within 48 hours of signup.</div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 1 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#FEE2E2;color:#B91C1C;">Problem 1</span>
+      <h4>Users register but do not immediately understand the next step</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>PayWise's current home screen surfaces approximately 14 options simultaneously — Cash Out, TopUp Wallet, Bank Accounts, Mobile TopUp, QR Codes, Pay Bill, Agent Locations, Gift Cards, ePOS, Refer Friends, and more. Fintech onboarding research consistently shows that users convert better when guided to a single first-value action. Users presented with this many choices will, statistically, choose nothing.</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>Apply <strong>progressive disclosure, not a checklist.</strong> The new user home screen should surface exactly one action — the one most relevant to the track the user selected at signup. For consumers: <em>"Pay a bill — 30 seconds."</em> For business owners: <em>"Accept your first payment."</em> For agents: <em>"Process your first customer bill."</em> All other features become visible only after that first action is completed.</p>
+        <p>A progress checklist still shows multiple items. Progressive disclosure shows one. The distinction matters because any list of options — even a short one — reintroduces choice paralysis.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 2 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#FEE2E2;color:#B91C1C;">Problem 2</span>
+      <h4>Trust barriers slow down or prevent the first payment</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Trust is the first filter every buyer type applies — ahead of price, convenience, and features. In T&amp;T, the 30+ demographic carries a structurally different trust barrier rooted in decades of institutional disappointment and visible scam exposure in tight-knit communities.</p>
+        <p>The CBTT license is PayWise's single most powerful trust asset and is currently underused. It answers the question: <em>"Is this regulated, or is this a random app?"</em></p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p><strong>For all users:</strong> The CBTT license credential must appear on the first onboarding screen, before any feature or action prompt. Not in the footer. Not on screen three. Screen one. Approved phrase: <em>"Licensed by the Central Bank of Trinidad and Tobago."</em></p>
+        <p><strong>For the 30+ segment specifically:</strong> Lead with regulation and accountability: <em>"Licensed. Local. Regulated the same way your bank is."</em> Convenience language comes after trust is established, not before.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 3 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#FEE2E2;color:#B91C1C;">Problem 3</span>
+      <h4>Users do not get a strong reason to transact within 48 hours</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Most users sign up because they were referred, saw an ad, or were curious — but they do not have an immediate, urgent reason to transact. Without a compelling trigger connected to a real-world event, the app sits idle. In T&amp;T, the natural recurring triggers are utility bill cycles (T&amp;TEC, WASA, Flow, Digicel, bMobile) and mobile top-up needs — both of which are monthly, predictable, and emotionally weighted (no one wants their lights cut).</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>Add a <strong>bill-due reminder workflow</strong> that connects onboarding directly to real local payment cycles. If a user signs up near a bill due date or within a known top-up cycle window, immediately surface that use case as the first suggested action.</p>
+        <p>Message: <em>"Your T&amp;TEC is probably due this month. Pay it in 30 seconds right here."</em></p>
+      </div>
+    </div>
+  </div>
+  <div class="dep-flag">
+    <span class="dep-icon">⚠</span>
+    <div>
+      <div class="dep-lbl">Infrastructure Dependency</div>
+      <p>This recommendation requires active push notification and SMS capability. These are <strong>not yet live in the product.</strong> Enabling lifecycle messaging is a prerequisite for this mechanic. This should be treated as Priority 1 infrastructure work before any activation campaign scales.</p>
+    </div>
+  </div>
+
+  <!-- PROBLEM 4 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#FEE2E2;color:#B91C1C;">Problem 4</span>
+      <h4>Users have no immediate reward for completing the first transaction</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Fintech activation research shows that incentives tied to <em>completed actions</em> outperform incentives tied to signup alone. A reward for downloading the app has no activation effect. A reward for completing the first bill payment converts the decision from "should I bother?" to "I get something for doing what I was going to do anyway."</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>Introduce a <strong>first-transaction reward</strong> — $5 TTD wallet credit or fee relief — granted automatically upon completing the first bill payment within 48 hours of signup.</p>
+        <p>The reward must be: (1) immediate — visible before they reach the payment screen; (2) certain — no conditions requiring reading; (3) relevant — wallet credit, not a prize draw.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 5 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#FEE2E2;color:#B91C1C;">Problem 5</span>
+      <h4>Users need trust reinforced at the moment of payment, not just at signup</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Trust must be re-confirmed at each stage — in the ad, on the landing page, during onboarding, and at the first transaction screen. Trust established at signup does not carry automatically into the payment moment. The payment screen is the highest-anxiety moment in the flow: the user is about to move real money.</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>Place the <strong>CBTT license signal and the support contact</strong> (WhatsApp: 868-723-8394) on the payment confirmation screen — not just in account settings or a help section.</p>
+        <p>Text at the confirmation step: <em>"Your payment is protected. PayWise is licensed by the Central Bank of T&amp;T."</em></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4 — LAPSED USERS -->
+<div class="section" id="s4">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,var(--b2),var(--b4));">04</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:var(--b1);">Existing / Lapsed Users</div>
+      <div class="sec-h2">Re-Engagement <em>Strategy</em></div>
+      <div class="sec-deck">PayWise registrants who have not transacted, or who transacted previously but have gone quiet.</div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 1 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#DBEAFE;color:#1E40AF;">Problem 1</span>
+      <h4>Lapsed users have lost the habit loop</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Habit formation research shows that people re-engage when the product becomes tied to a repeatable routine rather than a one-time experiment. A lapsed user who paid their Flow bill once and then stopped has not formed a habit — they completed a single action. The reactivation trigger must reconnect them to the next natural payment moment, not ask them to revisit the product generically.</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>Reframe all reactivation messaging around the user's <strong>upcoming recurring need.</strong> <em>"Your next bill is probably due"</em> outperforms <em>"We miss you — come back to PayWise."</em></p>
+        <p>Route returning users directly into the bill payment flow, not to the home screen. Do not restart them from zero.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 2 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#DBEAFE;color:#1E40AF;">Problem 2</span>
+      <h4>WhatsApp is the primary re-engagement channel — not push, not email</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>For the core T&amp;T bill-payer audience, WhatsApp seeding is a primary acquisition channel. In T&amp;T's social fabric, a WhatsApp message from a known contact carries significantly more weight than an app notification or email. Word-of-mouth through WhatsApp groups is the highest-trust mechanism available in this market.</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>For lapsed-user reactivation, <strong>WhatsApp should be the first channel deployed</strong> — ahead of push notifications and email.</p>
+        <p>Message format: <em>"Your T&amp;TEC is probably due this month — pay it in under a minute on PayWise."</em> This is not a promotional message. It is a useful reminder sent at the moment of real relevance.</p>
+      </div>
+    </div>
+  </div>
+  <div class="dep-flag">
+    <span class="dep-icon">⚠</span>
+    <div>
+      <div class="dep-lbl">Infrastructure Dependency</div>
+      <p>Personalised WhatsApp outreach at scale requires a CRM connection or broadcast tool. In the interim, manual or semi-automated WhatsApp messages to identifiable lapsed segments (registered but zero transactions) can achieve the same result with lower tooling overhead.</p>
+    </div>
+  </div>
+
+  <!-- PROBLEM 3 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#DBEAFE;color:#1E40AF;">Problem 3</span>
+      <h4>Lapsed users may still carry the original trust fears from signup</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Trust is not durable. A user who registered months ago and never transacted did not have a bad experience — they simply never had a good one. The trust present at signup has had no positive transaction to reinforce it and has likely faded or been displaced by competing narratives (scam stories in WhatsApp groups, negative experiences with other platforms).</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p>Reintroduce the <strong>CBTT license, the support contact, and a brief proof of safety</strong> whenever a dormant user receives a reactivation message. Do not assume existing familiarity.</p>
+        <p>The re-engagement message should behave like a first impression, not a follow-up.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM 4 -->
+  <div class="prob-rec">
+    <div class="prob-head">
+      <span class="prob-num" style="background:#DBEAFE;color:#1E40AF;">Problem 4</span>
+      <h4>Lapsed users need the lowest possible re-entry friction</h4>
+    </div>
+    <div class="prob-body">
+      <div class="pb-half">
+        <div class="pb-lbl">📊 Evidence</div>
+        <p>Return-user activation research consistently shows that shorter paths produce higher completion rates. The goal is to reduce the number of decisions a returning user must make before they reach the payment action. Sending them to the home screen and asking them to navigate from scratch will lose them again.</p>
+      </div>
+      <div class="pb-half">
+        <div class="pb-lbl">✅ Recommendation</div>
+        <p><strong>Deep-link all reactivation messages</strong> directly into the bill payment flow for the biller most relevant to that user (based on prior behaviour, or T&amp;TEC as the default).</p>
+        <p>The user opens the message, taps the link, and is already on the payment screen. One decision: confirm and pay.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 — REFERRAL MECHANICS -->
+<div class="section" id="s5">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,var(--g1),var(--b3));">05</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:var(--g2);">Referral Programme</div>
+      <div class="sec-h2">Timing <em>Matters</em></div>
+      <div class="sec-deck">A v1 correction — when to trigger the referral prompt changes everything.</div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <span class="cl-lbl">v1 Correction</span>
+    The investigation v1 recommended a dual-sided referral reward tied to the new user's first transaction — and that structure remains correct. However, the <strong>timing of the prompt for the referrer</strong> requires a specific correction from v1.
+  </div>
+
+  <div class="hl">
+    <div class="hl-lbl">The Fixed Rule</div>
+    <p>The referral prompt should be triggered after the referrer's <strong>third successful transaction</strong> — not after signup and not after the first transaction.</p>
+  </div>
+
+  <h3>Why the Timing Change Matters in T&amp;T</h3>
+  <p>Trust in this market is community-validated. A person who has used PayWise once cannot credibly vouch for it in a WhatsApp group or to a neighbour — they haven't formed genuine trust yet. A person who has paid three bills and received confirmation each time has a real experience to share. When they say "this works," it carries weight.</p>
+  <p>Triggering the referral too early produces low-quality shares that fail to convert, because the referred person's first question will be <em>"do you actually use it?"</em> — and the honest answer at transaction #1 is "not really yet."</p>
+
+  <div class="g2">
+    <div class="card">
+      <div class="card-lbl">Referrer</div>
+      <h4>Trigger: After transaction #3</h4>
+      <p>In-app referral prompt shown after the third successful bill payment. Wallet credit granted after the invited user completes their first bill payment.</p>
+    </div>
+    <div class="card">
+      <div class="card-lbl">Invited User (New)</div>
+      <h4>Reward: First-payment incentive</h4>
+      <p>Reduced fee or wallet credit on their first bill payment. Both rewards are immediate, visible, and tied to real product use — not signup or download.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 — AGENT ONBOARDING -->
+<div class="section" id="s6">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,#E65100,#BF360C);">06</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:#E65100;">Agent Track</div>
+      <div class="sec-h2">Agent Onboarding — <em>Scoping Note</em></div>
+      <div class="sec-deck">A distinct track with its own friction points, outside the 48-hour consumer activation framework.</div>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <span class="cl-lbl">Scope Note</span>
+    The original investigation scoped silently to consumer and merchant users. Agent onboarding is a distinct track with its own friction points. The Master Strategy Document identifies <strong>agent churn at 60 days</strong> as a named risk. The key friction points are documented below.
+  </div>
+
+  <div class="g3">
+    <div class="card" style="border-top:3px solid #E65100;">
+      <div class="card-lbl">Friction Point 1</div>
+      <h4>The $2,500 TTD minimum deposit</h4>
+      <p>Creates a psychological commitment barrier before any earnings are visible. The fix is a clear break-even calculator shown <em>before</em> the deposit is requested. At 30 transactions/day, the deposit is recovered in approximately 6 weeks.</p>
+    </div>
+    <div class="card" style="border-top:3px solid #D32F2F;">
+      <div class="card-lbl">Friction Point 2</div>
+      <h4>T&amp;TEC and WASA zero commission</h4>
+      <p>Must be disclosed in the <em>first</em> agent communication, not discovered later. Hidden discovery is a trust-destruction event in a market where word travels fast. Frame as foot traffic drivers, not commission generators.</p>
+    </div>
+    <div class="card" style="border-top:3px solid #F97316;">
+      <div class="card-lbl">Friction Point 3</div>
+      <h4>System reliability at peak periods</h4>
+      <p>End-of-month bill rush is the agent's existential fear. The onboarding pack must include a written failure-resolution protocol before the agent goes live — not as a support fallback, but as a pre-onboarding commitment.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="cl-lbl">Recommended Next Step</span>
+    These friction points are not covered by the 48-hour activation framework — agents have a longer, more deliberate evaluation cycle (1–3 weeks). They should be addressed in a <strong>parallel agent onboarding document</strong> that includes: break-even calculator, T&amp;TEC/WASA disclosure language, and a formal written failure-resolution protocol.
+  </div>
+</div>
+
+<!-- SECTION 7 — FRICTION POINTS -->
+<div class="section" id="s7">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,#B91C1C,#7F1D1D);">07</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:#EF4444;">Current State Audit</div>
+      <div class="sec-h2">8 Friction Points <em>In the Current Flow</em></div>
+      <div class="sec-deck">A snapshot of what exists today versus what needs to be true before any activation campaign can scale.</div>
+    </div>
+  </div>
+
+  <div style="overflow-x:auto;">
+  <table class="friction-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Friction Point</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="fnum">1</span></td>
+        <td>No active push notification or SMS infrastructure for lifecycle messaging. All activation depends on the user voluntarily returning.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">2</span></td>
+        <td>Home screen shows 14+ features simultaneously. No single first action is surfaced for new users. Cognitive overload kills conversion.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">3</span></td>
+        <td>CBTT license signal is present in brand materials but not placed prominently at onboarding entry points or the payment confirmation screen.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">4</span></td>
+        <td>No first-transaction reward or incentive visible in the current flow. The cost of the first action is perceived as risk with no immediate upside.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">5</span></td>
+        <td>No structured re-engagement path for registrants who stall after signup. No reactivation trigger tied to bill cycles.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">6</span></td>
+        <td>Referral prompt timing not yet tied to a trust-formation threshold (third transaction). Currently triggered too early — before the referrer has formed genuine conviction.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">7</span></td>
+        <td>No deep-linking from reactivation messages into specific payment flows. Returning users land on the home screen and must navigate from scratch.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+      <tr>
+        <td><span class="fnum">8</span></td>
+        <td>The 30+ demographic does not receive differentiated trust-first messaging. They see the same flow as younger, digitally comfortable users.</td>
+        <td><span class="fstatus">Unresolved</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- SECTION 8 — PRIORITIES -->
+<div class="section" id="s8">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,var(--g2),var(--b2));">08</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:var(--g2);">Execution Order</div>
+      <div class="sec-h2">Recommendations — <em>Prioritised</em></div>
+      <div class="sec-deck">Nine actions in the order they must be completed. Nothing in #2–9 can be scaled without #1 in place.</div>
+    </div>
+  </div>
+
+  <div class="callout danger">
+    <span class="cl-lbl">Non-Negotiable Gate</span>
+    <strong>Priority 1 must be completed before any paid acquisition or activation campaign scales.</strong> Everything else in this document depends on the ability to send lifecycle messages. This is a prerequisite, not a feature addition.
+  </div>
+
+  <div class="priority-list">
+    <div class="prio-item">
+      <div class="prio-num" style="background:var(--b4);">1</div>
+      <div class="prio-content">
+        <h4>Enable push notification and SMS infrastructure</h4>
+        <p>Everything else in this document depends on the ability to send lifecycle messages. This is a prerequisite, not a feature.</p>
+      </div>
+      <span class="prio-tag" style="background:#FEE2E2;color:#B91C1C;">Blocker</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#D32F2F;">2</div>
+      <div class="prio-content">
+        <h4>Redesign the first-use flow around progressive disclosure</h4>
+        <p>Surface the track-relevant first action on the new user home screen — bill pay for consumers, accept a payment for business owners, process a customer bill for agents. Hide all other features until after that first action is completed.</p>
+      </div>
+      <span class="prio-tag" style="background:#FEE2E2;color:#B91C1C;">Critical</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:var(--b3);">3</div>
+      <div class="prio-content">
+        <h4>Place the CBTT license signal on screen one and the payment confirmation screen</h4>
+        <p>Not in settings. Not in the footer. At the two highest-anxiety moments in the user journey.</p>
+      </div>
+      <span class="prio-tag" style="background:#FEE2E2;color:#B91C1C;">Critical</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:var(--g3);">4</div>
+      <div class="prio-content">
+        <h4>Introduce a first-transaction reward</h4>
+        <p>$5 TTD wallet credit or equivalent, granted upon completing the first bill payment within 48 hours. Visible before the user reaches the payment screen.</p>
+      </div>
+      <span class="prio-tag" style="background:#DCFCE7;color:#15803D;">High</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#0D9488;">5</div>
+      <div class="prio-content">
+        <h4>Activate bill-due reminder messaging</h4>
+        <p>WhatsApp first. Push notification second. Email third. Messages are contextual and practical — tied to real bill cycles, not generic app re-engagement.</p>
+      </div>
+      <span class="prio-tag" style="background:#DCFCE7;color:#15803D;">High</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:var(--b2);">6</div>
+      <div class="prio-content">
+        <h4>Fix referral trigger timing</h4>
+        <p>Move the referral prompt to post-transaction #3. Keep the dual-sided reward structure tied to the new user's first completed payment.</p>
+      </div>
+      <span class="prio-tag" style="background:#DBEAFE;color:#1E40AF;">Medium</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#E65100;">7</div>
+      <div class="prio-content">
+        <h4>Build a lapsed-user reactivation flow</h4>
+        <p>Deep-link directly into the bill payment screen. Lead with trust re-establishment (CBTT license, support contact). Do not restart from the home screen.</p>
+      </div>
+      <span class="prio-tag" style="background:#DBEAFE;color:#1E40AF;">Medium</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#4A148C;">8</div>
+      <div class="prio-content">
+        <h4>Launch the PayWise Local dual-sided incentive programme</h4>
+        <p>Seed vendor network, produce physical onboarding packs, launch consumer wallet credits — modelled on MercadoPago's QR adoption strategy, adapted for T&amp;T's community-trust market structure.</p>
+      </div>
+      <span class="prio-tag" style="background:#F3E5F5;color:#4A148C;">Parallel Track</span>
+    </div>
+    <div class="prio-item">
+      <div class="prio-num" style="background:#4A148C;">9</div>
+      <div class="prio-content">
+        <h4>Create agent onboarding as a separate document</h4>
+        <p>Break-even calculator, T&amp;TEC/WASA disclosure, failure-resolution protocol — all required before agent goes live.</p>
+      </div>
+      <span class="prio-tag" style="background:#F3E5F5;color:#4A148C;">Parallel Track</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 9 — T&T ADAPTATION -->
+<div class="section" id="s9">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,var(--g1),var(--g4));">09</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:var(--g2);">Caribbean Context</div>
+      <div class="sec-h2">T&amp;T / Caribbean <em>Adaptation Notes</em></div>
+      <div class="sec-deck">US and European fintech playbooks require specific adaptation before applying to T&amp;T. Five differences that change the strategy.</div>
+    </div>
+  </div>
+
+  <p>Recommendations from US and European fintech playbooks require adaptation before applying to T&amp;T. The specific differences to account for:</p>
+
+  <div class="adapt-grid">
+    <div class="adapt-card">
+      <div class="adapt-num">Difference 01</div>
+      <h4>Trust is community-validated, not brand-validated</h4>
+      <p>A WhatsApp recommendation from a known person outweighs any ad. Activation strategies must account for the community trust layer — this is not a nice-to-have; it is the primary mechanism by which trust transfers in T&amp;T.</p>
+    </div>
+    <div class="adapt-card">
+      <div class="adapt-num">Difference 02</div>
+      <h4>The 30+ demographic requires authority-first messaging</h4>
+      <p>Speed and convenience language triggers skepticism in this group, not conversion. Lead with regulation and accountability. Convenience language comes after trust is established — never before.</p>
+    </div>
+    <div class="adapt-card">
+      <div class="adapt-num">Difference 03</div>
+      <h4>Bill payment is the recurring anchor, not P2P</h4>
+      <p>Unlike markets where peer-to-peer payment drives adoption, T&amp;T's highest-frequency digital payment need is utility bills. Onboarding should be oriented around this specific use case — not around sending money to friends.</p>
+    </div>
+    <div class="adapt-card">
+      <div class="adapt-num">Difference 04</div>
+      <h4>Cash feels safe; digital feels risky</h4>
+      <p>The product must make the first digital transaction feel as safe as handing over physical cash to a person in a shop. That requires visible authority signals and a human support contact at every friction point in the flow.</p>
+    </div>
+    <div class="adapt-card">
+      <div class="adapt-num">Difference 05</div>
+      <h4>WhatsApp is the communications infrastructure</h4>
+      <p>In T&amp;T, WhatsApp is where trust travels, where recommendations happen, and where bad stories spread. All activation and re-engagement strategies should treat it as the primary channel — not a secondary supplement to email or push.</p>
+    </div>
+  </div>
+
+  <div class="ev" style="margin-top:20px;">
+    <p>The average person over the age of 30 in Trinidad and Tobago has a general lack of trust for technology… they still rather use traditional cash-based methods. Even if they know about the benefits of fintech… many fall into the habit of 'old talk' and are conservative rather than progressive.</p>
+    <div class="ev-src">Reddit · r/TrinidadandTobago · Stevio006</div>
+  </div>
+</div>
+
+<!-- SECTION 10 — PAYWISE LOCAL -->
+<div class="section" id="s10">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,#0D9488,#065F46);">10</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:#0D9488;">Dual-Sided Incentive Programme</div>
+      <div class="sec-h2">PayWise <em>Local</em></div>
+      <div class="sec-deck">Drawing from MercadoPago's QR adoption playbook in Argentina — adapted for T&amp;T's community-trust market structure.</div>
+    </div>
+  </div>
+
+  <h3>The Concept</h3>
+  <p>When MercadoPago launched QR code payments in Argentina, they offered zero transaction costs for any payments made via QR for a limited period and invested heavily in consumer discounts to drive adoption. Their VP described the logic plainly: <em>"The idea is to create an ecosystem where sellers and brands can subsidise these discounts in the future. But at the beginning, the effort was done a hundred percent on our side."</em></p>
+  <p>The result: 8.5 million QR payments processed in Argentina alone within the first year. The platform absorbed the cost early to build the habit. The ecosystem then sustained itself.</p>
+  <p>PayWise is in the same structural position — a market where cash dominates, digital payments are available but unfamiliar, and trust is community-validated rather than brand-built. A dual-sided incentive programme targets both the vendor and the consumer simultaneously, making each side the activation trigger for the other.</p>
+
+  <div class="hl">
+    <div class="hl-lbl">The Core Insight</div>
+    <p>In T&amp;T's trust-first market, a neighbour paying for their groceries with their phone at the corner shop — and the shopkeeper accepting it without friction — is the most powerful product demonstration PayWise can produce. The people behind them in line have just received a trust signal no ad can replicate.</p>
+  </div>
+
+  <h3>How It Works</h3>
+
+  <div class="g2">
+    <div class="card" style="border-top:3px solid var(--g2);">
+      <div class="card-lbl">For Local Vendors</div>
+      <ul style="margin:0;padding-left:16px;">
+        <li style="margin-bottom:6px;"><strong>Zero transaction fees on QR payments for the first 3 months</strong> after signup. The vendor takes on no cost while forming the habit of accepting digital payments.</li>
+        <li style="margin-bottom:6px;"><strong>A physical "PayWise Accepted Here" window sticker</strong> included in the signup pack. In T&amp;T's cash-first environment, a familiar sticker on a trusted local store normalises digital payment in a way no ad can replicate.</li>
+        <li style="margin-bottom:0;"><strong>A foot traffic bonus:</strong> vendors who onboard a minimum number of new PayWise users through their store receive a commission bonus on top of standard transaction earnings. This turns the vendor into an active advocate.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--b1);">
+      <div class="card-lbl">For New Consumers</div>
+      <ul style="margin:0;padding-left:16px;">
+        <li style="margin-bottom:6px;"><strong>A wallet credit ($10–15 TTD) redeemable only at participating local vendors</strong> — not for bill payments, not online. This forces the first PayWise transaction to happen at a physical store, in front of a real person, in a familiar environment. That experience is categorically more trust-building than a first solo bill payment at home.</li>
+        <li style="margin-bottom:0;"><strong>A first-purchase discount at participating vendors</strong> when paying with PayWise for the first time — e.g. 5% off. PayWise subsidises this discount for the first 90 days. The consumer gets a visible, immediate benefit.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Why the Two Sides Activate Each Other</h3>
+  <p>The consumer has a concrete reason to walk into a local store and use PayWise. The vendor sees a real customer paying digitally — probably for the first time. That moment is worth more than any ad in T&amp;T's trust-driven market. It is visible, social, and local.</p>
+  <p>This mechanic addresses a specific gap in the current onboarding model: the first transaction for a consumer is currently a solo, private action (paying a bill at home). The programme makes the first transaction a social, visible, community-embedded action instead. That distinction matters enormously for the 30+ demographic, whose trust is formed through observation of people they know, not through personal experimentation.</p>
+
+  <div class="callout" style="margin-top:20px;">
+    <span class="cl-lbl">T&amp;T-Specific Advantages</span>
+    <ul style="margin:6px 0 0;padding-left:16px;">
+      <li>Local vendors are already trusted community anchors — their implicit endorsement carries authority no marketing budget can purchase.</li>
+      <li>The physical sticker bypasses the "is this app real?" question. A sticker on a shop door requires nothing — it signals normalcy.</li>
+      <li>Keeping the wallet credit redeemable only at community vendors keeps money circulating locally — a message that resonates in Caribbean market culture.</li>
+      <li>The structural gap is identical to Argentina's: Apple Pay and Google Pay don't work with local cards in T&amp;T. PayWise has the same first-mover window.</li>
+    </ul>
+  </div>
+
+  <div class="sub-h">Programme Risks and Mitigations</div>
+  <div style="overflow-x:auto;">
+  <table class="friction-table">
+    <thead>
+      <tr>
+        <th>Risk</th>
+        <th>Mitigation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PayWise absorbs subsidy cost with no guaranteed return</td>
+        <td>Set a hard 90-day window. After that, standard fees apply. The habit is formed or the vendor has churned — either way the subsidy ends cleanly.</td>
+      </tr>
+      <tr>
+        <td>Low vendor quality damages the consumer experience</td>
+        <td>Set minimum eligibility criteria: established storefront, existing foot traffic, no active complaints. Quality over volume in the first cohort.</td>
+      </tr>
+      <tr>
+        <td>Consumer wallet credit goes unspent</td>
+        <td>Make the credit visible and time-limited (expires in 30 days). A countdown nudge via WhatsApp at day 20 converts holdouts.</td>
+      </tr>
+      <tr>
+        <td>Insufficient vendor network at launch</td>
+        <td>Seed at least 50 participating vendors in high-footfall areas (Port of Spain, San Fernando, Chaguanas) before the consumer-facing campaign goes live.</td>
+      </tr>
+      <tr>
+        <td>Vendors misunderstand the discount reimbursement model</td>
+        <td>Train vendors at onboarding. Include a one-page FAQ in the signup pack. Provide a WhatsApp support line for vendor queries.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="sub-h">Implementation Priority</div>
+  <ol>
+    <li>Define vendor eligibility criteria and build the signup flow for vendors</li>
+    <li>Produce physical onboarding packs (sticker, one-page guide, FAQ card)</li>
+    <li>Seed 50 vendors in target areas before any consumer campaign launches</li>
+    <li>Launch consumer-facing campaign with wallet credit offer</li>
+    <li>Monitor redemption rate, vendor retention, and consumer repeat transaction rate at 30 and 60 days</li>
+    <li>Evaluate subsidy cost vs. activated user LTV at day 90 before deciding whether to extend, graduate, or close the programme</li>
+  </ol>
+
+  <div class="ev" style="margin-top:20px;">
+    <p>The idea is to create an ecosystem where sellers and brands can subsidise these discounts in the future. But at the beginning, the effort was done a hundred percent on our side.</p>
+    <div class="ev-src">MercadoPago VP · MercadoLibre 10-K filings (2018, 2020) · PYMNTS / eMarketer</div>
+  </div>
+</div>
+
+<!-- SECTION 11 — CONCLUSION -->
+<div class="section" id="s11">
+  <div class="sec-head">
+    <div class="sec-badge" style="background:linear-gradient(135deg,var(--b1),var(--g3));">11</div>
+    <div class="sec-titles">
+      <div class="sec-tag" style="color:var(--b1);">Summary</div>
+      <div class="sec-h2">Conclusion &amp; <em>The Winning Combination</em></div>
+      <div class="sec-deck">The one sequence that makes all of this work — and the conditions that must be true before scaling.</div>
+    </div>
+  </div>
+
+  <p>The fastest path to activation is a better first-use experience that removes friction, establishes trust at every decision point, and delivers a clear bill payment success within 48 hours of signup. For lapsed users, the fastest path back is a WhatsApp message tied to a real upcoming bill — deep-linked directly to the payment screen.</p>
+
+  <div class="conclusion">
+    <div class="conclusion-lbl">The Winning Combination</div>
+    <h3>Trust-first onboarding → single surfaced action → first-transaction reward → real-world bill trigger → WhatsApp-led reactivation → referral prompt after trust is formed → dual-sided vendor programme to embed the first transaction in community life.</h3>
+    <p>No part of this can be scaled before the <strong>push/SMS infrastructure is live</strong> and before the <strong>onboarding flow is simplified to one first action.</strong> The PayWise Local programme additionally requires a minimum vendor network before the consumer-facing campaign launches.</p>
+    <p>The activation gap is not a marketing problem — it is an onboarding design problem with a trust layer on top. Solving it with more acquisition spend before fixing the funnel will accelerate losses, not growth.</p>
+  </div>
+
+  <div class="sub-h">v2.5 vs v2 — What Changed</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-lbl">Additions in v2.5</div>
+      <ul style="margin:0;padding-left:16px;">
+        <li style="margin-bottom:6px;">Aha moment reframed from a single universal action (bill payment) to a per-user-type model — each track has its own specific aha moment, with bill payment retained as the primary recommendation for the consumer track</li>
+        <li style="margin-bottom:6px;">Progressive disclosure recommendation updated to surface the track-relevant first action rather than a hardcoded bill pay prompt for all users</li>
+        <li style="margin-bottom:6px;">WhatsApp elevated to primary re-engagement channel</li>
+        <li style="margin-bottom:6px;">30+ trust barrier deepened as a distinct friction point</li>
+        <li style="margin-bottom:6px;">Referral trigger timing corrected to post-transaction #3</li>
+        <li style="margin-bottom:6px;">Agent onboarding scoping note added</li>
+        <li style="margin-bottom:6px;">Cognitive overload fix changed from checklist to progressive disclosure</li>
+        <li style="margin-bottom:6px;">Push/SMS infrastructure dependency flagged explicitly throughout</li>
+        <li>New section added: Dual-Sided Incentive Programme ("PayWise Local") — modelled on MercadoPago's QR adoption strategy in Argentina, adapted for T&amp;T's community-trust market structure</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-lbl">Unchanged from v2</div>
+      <ul style="margin:0;padding-left:16px;">
+        <li style="margin-bottom:6px;">Dual-sided referral reward structure (tied to new user's first transaction)</li>
+        <li style="margin-bottom:6px;">48-hour activation window as the primary metric</li>
+        <li style="margin-bottom:6px;">CBTT license as the single most powerful trust asset</li>
+        <li style="margin-bottom:6px;">Bill payment as the highest-frequency T&amp;T use case</li>
+        <li style="margin-bottom:6px;">WhatsApp as a high-priority channel (elevated to primary in v2.5)</li>
+        <li>First-transaction incentive recommendation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div style="margin-bottom:6px;"><span style="color:var(--g2);">Pay</span><span style="color:var(--b2);">Wise</span> · Onboarding Research v2.5 · Confidential · May 2026</div>
+  <div style="opacity:.4;">First Transaction Within 48 Hours · Consumer + Agent Onboarding · T&amp;T / Caribbean Market</div>
+</div>
+
+</main>
+
+<script>
+function setActive(el) {
+  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Scroll spy
+const sections = ['hero','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11'];
+const links = document.querySelectorAll('.sb-link[href^="#"]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 80) current = id;
+  });
+  links.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+}, { passive: true });
+</script>
+
+
+
+</body></html>
