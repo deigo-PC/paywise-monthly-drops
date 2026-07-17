@@ -1,12 +1,8 @@
 import c1s0 from "@/assets/paywise/carousels/c1/slide-0.png";
-import c1s1 from "@/assets/paywise/carousels/c1/slide-1.png";
-import c1s2 from "@/assets/paywise/carousels/c1/slide-2.png";
-import c1s3 from "@/assets/paywise/carousels/c1/slide-3.png";
 
 import c2s0 from "@/assets/paywise/carousels/c2/slide-0.png";
 import c2s1 from "@/assets/paywise/carousels/c2/slide-1.png";
 import c2s2 from "@/assets/paywise/carousels/c2/slide-2.png";
-import c2s3 from "@/assets/paywise/carousels/c2/slide-3.png";
 
 import c3s0 from "@/assets/paywise/carousels/c3/slide-0.png";
 import c3s1 from "@/assets/paywise/carousels/c3/slide-1.png";
@@ -23,6 +19,16 @@ import c5s2 from "@/assets/paywise/carousels/c5/slide-2.png";
 import c6s0 from "@/assets/paywise/carousels/c6/slide-0.png";
 import c6s1 from "@/assets/paywise/carousels/c6/slide-1.png";
 import c6s2 from "@/assets/paywise/carousels/c6/slide-2.png";
+
+import c7s0 from "@/assets/paywise/carousels/c7/slide-0.png";
+import c7s1 from "@/assets/paywise/carousels/c7/slide-1.png";
+import c7s2 from "@/assets/paywise/carousels/c7/slide-2.png";
+import c7s3 from "@/assets/paywise/carousels/c7/slide-3.png";
+
+import c8s0 from "@/assets/paywise/carousels/c8/slide-0.png";
+import c8s1 from "@/assets/paywise/carousels/c8/slide-1.png";
+import c8s2 from "@/assets/paywise/carousels/c8/slide-2.png";
+import c8s3 from "@/assets/paywise/carousels/c8/slide-3.png";
 
 import blog1Banner from "@/assets/paywise/blogs/blog1-banner.png";
 import blog1Story from "@/assets/paywise/blogs/blog1-story.png";
@@ -83,13 +89,13 @@ export const carousels: CarouselItem[] = [
     id: 1,
     title: "Island Finance — Now on PayWise",
     caption: "Big news 🇹🇹 You can now pay your Island Finance loan directly on PayWise. No branch. No queue. No running around. Open the app, select Island Finance, and pay in 30 seconds. Licensed by the Central Bank of T&T.",
-    slides: [c1s0, c1s1, c1s2, c1s3],
+    slides: [c1s0],
   },
   {
     id: 2,
     title: "Cash-Out — Your Wallet, Your Cash",
     caption: "Need cash? Your PayWise wallet isn't just for digital payments anymore. Cash-Out lets you withdraw physical cash at any PayWise agent in Trinidad. Walk in, show your QR, walk out with cash. No ATM. No extra fees. Licensed by the Central Bank of T&T.",
-    slides: [c2s0, c2s1, c2s2, c2s3],
+    slides: [c2s0, c2s1, c2s2],
   },
   {
     id: 3,
@@ -114,6 +120,18 @@ export const carousels: CarouselItem[] = [
     title: "Real People. Real Bills. Real Easy.",
     caption: "Real people, real bills, real easy. Marissa pays her T&TEC in 30 seconds. Derek accepts card payments at his shop. Keisha pays her Island Finance loan from her phone. Thousands of Trinidadians are already using PayWise. Licensed by the Central Bank of T&T.",
     slides: [c6s0, c6s1, c6s2],
+  },
+  {
+    id: 7,
+    title: "Mid-Year Bill Reset — Stop Paying to Pay Your Bills",
+    caption: "Mid-year is the perfect time to check yourself. How much did you spend last month just paying your bills? Bank fees, bus fare, data. With PayWise, you pay your T&TEC in 30 seconds. No queue. No more waiting. Licensed by the Central Bank of T&T.",
+    slides: [c7s0, c7s1, c7s2, c7s3],
+  },
+  {
+    id: 8,
+    title: "You Left Home to Pay a Bill?",
+    caption: "You left home. To pay a bill. In 2026. Let that sink in. PayWise takes 30 seconds. T&TEC. WASA. Flow. Digicel. All of them. Licensed by the Central Bank of T&T. Your Money, Your Way.",
+    slides: [c8s0, c8s1, c8s2, c8s3],
   },
 ];
 

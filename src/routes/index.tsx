@@ -76,7 +76,7 @@ function Index() {
         </h1>
         <p className="mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
           A quick walk-through of everything going out this month: the Instagram grid as it will
-          look at month-end, the 6 carousels, 3 blog posts, 3 newsletters and 2 standalone posts — each with its
+          look at month-end, the 8 carousels, 3 blog posts, 3 newsletters and 2 standalone posts — each with its
           companion story.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -144,7 +144,7 @@ function Index() {
       <Section
         id="carousels"
         title="Carousels"
-        subtitle="6 carousels for Instagram, Facebook and LinkedIn."
+        subtitle="8 carousels for Instagram, Facebook and LinkedIn."
       >
         <div className="space-y-16">
           {carousels.map((c) => (
