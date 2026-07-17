@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayWise — Blog Posts — July/August 2026</title>
+<style>
+  :root {
+    --bg: #000000;
+    --surface: #2a2a2a;
+    --surface-2: #222222;
+    --text: #ffffff;
+    --text-muted: #9ca3af;
+    --text-soft: #cccccc;
+    --border: #3a3a3a;
+    --accent: #3b82f6;
+    --accent-soft: #1e3a5f;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --radius: .75rem;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --code-font: "SF Mono", "Consolas", "Menlo", monospace;
+    --sidebar-w: 240px;
+  }
+
+  [data-theme="light"] {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --surface-2: #f1efe9;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --text-soft: #333333;
+    --border: #e3e1dc;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --success: #16a34a;
+    --warning: #d97706;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    transition: background .2s, color .2s;
+  }
+
+  .app-layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    z-index: 50;
+    transition: transform .25s ease;
+  }
+
+  .sidebar-inner { padding: 24px 16px; display: flex; flex-direction: column; gap: 24px; }
+
+  .sidebar-brand {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 4px 12px;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background .12s, color .12s;
+  }
+
+  .sidebar-link:hover { background: var(--surface-2); color: var(--text); }
+
+  .sidebar-link.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+  .sidebar-close { display: none; background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; padding: 0 4px; }
+
+  .sidebar-overlay { display: none; }
+
+  .main-content { min-width: 0; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  .header {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .hamburger { display: none; }
+
+  .header-top h1 { font-size: 28px; font-weight: 700; margin: 0; flex: 1; }
+
+  .theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 12px;
+    line-height: 1;
+    transition: background .15s;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover { background: var(--surface-2); }
+
+  .header-sub { font-size: 15px; color: var(--text-muted); margin-bottom: 4px; }
+
+  .header-count { font-size: 13px; color: var(--text-muted); }
+
+  .blog-section {
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color .15s;
+  }
+
+  .blog-section:hover { border-color: #555; }
+
+  .blog-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .1s;
+  }
+
+  .blog-header:hover { background: var(--surface-2); }
+
+  .blog-header h2 { margin: 0; font-size: 16px; font-weight: 700; }
+
+  .blog-meta { font-size: 13px; color: var(--text-muted); font-weight: 400; flex: 1; }
+
+  .blog-toggle-icon {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform .15s;
+    flex-shrink: 0;
+  }
+
+  .blog-section.collapsed .blog-toggle-icon { transform: rotate(-90deg); }
+  .blog-section.collapsed .blog-body-wrap { display: none; }
+
+  .blog-body-wrap { border-top: 1px solid var(--border); }
+
+  .banner-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .banner-card .banner-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    background: var(--surface-2);
+  }
+
+  .banner-card .banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.75));
+    padding: 32px 24px 16px;
+    pointer-events: none;
+  }
+
+  .banner-card .banner-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+
+  .banner-card .banner-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  .md-card {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .md-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--surface-2);
+  }
+
+  .md-card-header .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--accent);
+  }
+
+  .md-card-header .section-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-seo { background: var(--accent-soft); color: var(--accent); }
+  .badge-body { background: rgba(34,197,94,0.15); color: var(--success); }
+  .badge-faq { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .badge-qa { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .badge-image { background: rgba(139,92,246,0.15); color: #a78bfa; }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--font);
+    padding: 5px 10px;
+    transition: background .1s, color .1s;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .copy-btn:hover { background: var(--border); color: var(--text); }
+
+  .copy-btn.copied { border-color: var(--success); color: var(--success); }
+
+  .section-meta { font-size: 11px; color: var(--text-muted); flex: 1; }
+
+  .md-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .md-field {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  .md-field:nth-child(even) { border-right: none; }
+  .md-field:nth-last-child(-n+2) { border-bottom: none; }
+
+  .md-field-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 4px;
+  }
+
+  .md-field-value {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .md-field-value code {
+    font-family: var(--code-font);
+    font-size: 12px;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .post-body { padding: 20px; border-bottom: 1px solid var(--border); }
+
+  .post-body h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .post-body h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+    color: var(--text);
+  }
+
+  .post-body h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  .post-body p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    color: var(--text-soft);
+  }
+
+  .post-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .post-body a:hover { color: #60a5fa; }
+
+  .post-body ol, .post-body ul {
+    margin: 8px 0 12px 20px;
+    font-size: 14px;
+    color: var(--text-soft);
+  }
+
+  .post-body li { margin-bottom: 4px; line-height: 1.6; }
+
+  .post-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .post-body blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 8px 16px;
+    margin: 16px 0;
+    background: var(--surface-2);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  .cta-box {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .cta-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+
+  .cta-box p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+    line-height: 1.5;
+  }
+
+  .cta-box a {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity .15s;
+  }
+
+  .cta-box a:hover { opacity: 0.9; }
+
+  .faq-list { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+
+  .faq-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-q {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .faq-a {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .faq-a a { color: var(--accent); text-decoration: underline; }
+
+  .image-suggest { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+
+  .image-suggest-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .image-suggest-item:last-child { margin-bottom: 0; }
+
+  .qa-collapse { border-bottom: 1px solid var(--border); }
+
+  .qa-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: var(--surface-2);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .qa-header:hover { opacity: 0.9; }
+
+  .qa-header .qa-toggle {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform .15s;
+  }
+
+  .qa-header .section-label { font-size: 11px; color: #ef4444; }
+  .qa-header .section-meta { font-size: 11px; color: var(--text-muted); }
+
+  .qa-content { padding: 16px 20px; display: none; }
+
+  .qa-content.open { display: block; }
+
+  .qa-content h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 12px 0 4px;
+  }
+
+  .qa-content h4:first-child { margin-top: 0; }
+
+  .qa-content p, .qa-content li {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .qa-content ol {
+    margin: 4px 0 12px 18px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .qa-content code {
+    font-family: var(--code-font);
+    font-size: 11px;
+    background: var(--surface-2);
+    padding: 1px 4px;
+    border-radius: 3px;
+    word-break: break-all;
+  }
+
+  .footer {
+    margin-top: 64px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 800px) {
+    .app-layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      transform: translateX(-100%);
+      width: 280px; z-index: 50;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-close { display: block; }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 49; }
+    .sidebar-overlay.open { display: block; }
+    .hamburger { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); cursor: pointer; font-size: 18px; padding: 8px 10px; line-height: 1; flex-shrink: 0; }
+    .hamburger:hover { background: var(--surface-2); }
+    .md-grid { grid-template-columns: 1fr; }
+    .md-field:nth-child(even) { border-right: 1px solid var(--border); }
+    .md-field:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+    .md-field:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 20px 12px 48px; }
+    .header-top h1 { font-size: 22px; }
+    .blog-header { padding: 12px 14px; }
+    .md-card-header { padding: 10px 14px; }
+    .md-field { padding: 10px 14px; }
+    .post-body { padding: 14px; }
+    .post-body h1 { font-size: 20px; }
+    .post-body h2 { font-size: 16px; }
+    .faq-list { padding: 12px 14px; }
+    .image-suggest { padding: 12px 14px; }
+    .qa-content { padding: 12px 14px; }
+  }
+
+  @media print {
+    body { background: #ffffff !important; color: #000000 !important; }
+    .sidebar, .hamburger, .theme-toggle, .copy-btn, .blog-toggle-icon, .qa-toggle { display: none !important; }
+    .app-layout { display: block; }
+    .container { max-width: 100%; padding: 0; }
+    .blog-section { break-inside: avoid; }
+    .md-card { break-inside: avoid; }
+    .post-body { break-inside: avoid; }
+    .faq-list { break-inside: avoid; }
+    .qa-content { display: block !important; }
+    :root { --bg: #ffffff; --surface: #f5f5f5; --text: #000000; --text-muted: #555555; --text-soft: #222222; --border: #cccccc; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-brand">
+        <span>PayWise</span>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close navigation">✕</button>
+      </div>
+      <nav class="sidebar-nav" id="sidebarNav">
+        <span class="sidebar-label">Blog Posts</span>
+        <div id="sidebarLinks">
+          <a href="#blog-1" class="sidebar-link">1 — Island Finance Loan on PayWise</a>
+          <a href="#blog-2" class="sidebar-link">2 — How Many Bills the Hard Way?</a>
+          <a href="#blog-3" class="sidebar-link">3 — What CBTT License Means</a>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <div class="container">
+
+      <header class="header">
+        <div class="header-top">
+          <button class="hamburger" id="sidebarToggle" aria-label="Open navigation">☰</button>
+          <h1>PayWise — Blog Posts</h1>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        </div>
+        <p class="header-sub">July/August 2026 · 3 posts · Brand Voice: CBTT-first, local, trustworthy institution</p>
+        <p class="header-count">3 blog posts · Each with metadata + paste-ready body + FAQ + banner suggestions</p>
+      </header>
+
+      <!-- ═══════════ BLOG 1 — ISLAND FINANCE ═══════════ -->
+      <section class="blog-section" id="blog-1">
+        <div class="blog-header">
+          <span class="blog-toggle-icon">▼</span>
+          <h2>You Can Now Pay Your Island Finance Loan on PayWise</h2>
+          <span class="blog-meta">July 24 · Cash-Poor Bill Payers</span>
+        </div>
+        <div class="blog-body-wrap">
+
+          <!-- Banner Suggestion -->
+          <div class="banner-card">
+            <div class="banner-img" style="background: linear-gradient(135deg, #0f1724 0%, #1a3a6b 50%, #195A9E 100%); display: flex; align-items: center; justify-content: center; padding: 40px;">
+              <div style="text-align: center; color: rgba(255,255,255,0.85);">
+                <div style="font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: #69CE57; margin-bottom: 16px;">BANNER CONCEPT</div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 14px;">
+                  <span style="font-size: 28px; font-weight: 800; color: #fff;">PayWise</span>
+                  <span style="font-size: 24px; color: var(--text-muted);">+</span>
+                  <span style="font-size: 22px; font-weight: 600; color: #69CE57;">Island Finance</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted); max-width: 480px; margin: 0 auto;">Use Carousel 1's logo-pairing concept — both logos side by side on brand dark background with green ring motif and "Loan payments now available" tag pill.</div>
+              </div>
+            </div>
+            <div class="banner-overlay">
+              <div class="banner-label">Banner Suggestion</div>
+              <div class="banner-desc">Based on: Carousel 1 (Island Finance) logo-pairing. Adapt to 1200×630 landscape. Both logos side by side on dark brand background + green ring motif.</div>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-seo">SEO</span>
+              <span class="section-label">Metadata</span>
+              <span class="section-meta">Yoast / RankMath fields — not pasted into post body</span>
+            </div>
+            <div class="md-grid">
+              <div class="md-field"><div class="md-field-label">SEO Title</div><div class="md-field-value">Pay Your Island Finance Loan on PayWise — 30 Seconds, No Branch</div></div>
+              <div class="md-field"><div class="md-field-label">Meta Description</div><div class="md-field-value">Island Finance loan payments are now accepted on PayWise. Pay your loan in 30 seconds from your phone. No branch, no queue, no hassle. Licensed by the Central Bank of T&amp;T.</div></div>
+              <div class="md-field"><div class="md-field-label">URL Slug</div><div class="md-field-value"><code>/pay-island-finance-loan-paywise/</code></div></div>
+              <div class="md-field"><div class="md-field-label">Primary Keyword</div><div class="md-field-value">Island Finance loan payment online</div></div>
+              <div class="md-field"><div class="md-field-label">Secondary Keywords</div><div class="md-field-value">pay Island Finance loan, PayWise bill payment, loan payment app Trinidad, digital loan payment</div></div>
+              <div class="md-field"><div class="md-field-label">Search Intent</div><div class="md-field-value">Commercial — people who have an Island Finance loan and are looking for a more convenient way to pay it.</div></div>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-body">Body</span>
+              <span class="section-label">Paste-ready post</span>
+              <span class="section-meta">H1 + H2s + CTA + FAQ — copy this into WordPress</span>
+              <button class="copy-btn" data-copy-target="post-1" aria-label="Copy post body">📋 Copy post</button>
+            </div>
+            <div class="post-body" id="post-1">
+
+<h1>You Can Now Pay Your Island Finance Loan on PayWise — Here's How</h1>
+
+<p>If you have an Island Finance loan, you know the routine. Every month, you head to a branch. You stand in a payment line. You hand over cash or a card and hope everything processes correctly.</p>
+
+<p>That routine just changed.</p>
+
+<p>PayWise now accepts Island Finance loan payments directly in the app. Thirty seconds. From your phone. Anywhere in Trinidad.</p>
+
+<p>Here's what that means for you.</p>
+
+<h2>One More Biller, One Less Trip</h2>
+
+<p>PayWise already lets you pay T&amp;TEC, WASA, Flow, Digicel, bMobile, and more. Island Finance is the newest addition — bringing personal loan payments into the same app where you already pay your utilities.</p>
+
+<p>Instead of managing loan payments separately — a different trip, a different queue, a different receipt — everything lives in one place. Your T&amp;TEC bill. Your WASA. Your Island Finance loan. One wallet. One app. One set of receipts you can find again.</p>
+
+<p>For anyone who has ever run around at the end of the month trying to get everything paid before the deadline, this is the point: fewer trips, fewer lines, fewer things to keep track of.</p>
+
+<h2>How to Pay Your Island Finance Loan in 30 Seconds</h2>
+
+<p>Here is exactly how it works:</p>
+
+<ol>
+<li>Open PayWise on your phone.</li>
+<li>Tap "Pay Bill."</li>
+<li>Select Island Finance from the biller list.</li>
+<li>Enter your loan details (account number or customer ID).</li>
+<li>Enter the amount you want to pay.</li>
+<li>Confirm.</li>
+</ol>
+
+<p>That is it. The payment posts immediately. You get a receipt saved in the app — no paper to lose, no envelope to stuff in the glovebox.</p>
+
+<p>Compare that to a branch visit. Travel time. Parking. A line that never moves as fast as you need it to. The whole thing takes less time than most people spend driving to a payment centre.</p>
+
+<h2>Why This Matters for Trinidadians</h2>
+
+<p>Most loan payment options in Trinidad come with hidden costs. Travel time. Wait time. Cash handling fees at some agents. The actual cost of paying a bill is higher than the bill itself — when you count your time.</p>
+
+<p>PayWise eliminates all of that. And because PayWise is <a href="https://paywise.co/about">licensed by the Central Bank of Trinidad and Tobago</a>, every payment is regulated, tracked, and protected. Your money doesn't disappear into a random app. It goes through a Central Bank-licensed system, the same way your bank processes transactions.</p>
+
+<p>That matters in a market where people have been burned by platforms that freeze funds or disappear. The CBTT license is not a marketing line — it is a legal framework that puts your money under regulatory oversight.</p>
+
+<h2>What's Next for PayWise Billers</h2>
+
+<p>Island Finance is the latest addition, but it is not the last. PayWise is continuing to add more billers, more features, and more ways to use your money from one app. The <a href="https://paywise.co/pay-bills-top-up">full list of billers</a> keeps growing — and each new addition means one less trip you have to make.</p>
+
+<p>If you already use PayWise for your T&amp;TEC, your WASA, or your phone bills, your Island Finance loan now belongs in the same place. If you have not tried PayWise yet, this is a good reason to start.</p>
+
+<hr>
+
+<div class="cta-box">
+<h3>Ready to simplify your payments?</h3>
+<p>Download PayWise and pay your Island Finance loan in 30 seconds. No branch. No queue. Just one less thing to worry about.</p>
+<a href="https://paywise.co/personal/">→ Download PayWise. Pay your Island Finance loan in 30 seconds.</a>
+</div>
+
+<h2>FAQ</h2>
+
+<p><strong>Is Island Finance the only new biller added recently?</strong><br>
+Island Finance is the most recent addition. The full biller list inside the app shows all available options, and it continues to grow.</p>
+
+<p><strong>Do I need a special account to pay my loan?</strong><br>
+No. The same PayWise account you use for other bills works for Island Finance. Just open the app, select Island Finance, and pay.</p>
+
+<p><strong>How long does the payment take to post?</strong><br>
+It posts immediately. You will see it reflected in your loan balance right away, and a receipt is saved in the app.</p>
+
+<p><strong>Is there a fee to pay my Island Finance loan through PayWise?</strong><br>
+Check the <a href="https://paywise.co/fees">PayWise fees page</a> for current pricing on bill payments. Standard bill payment rates apply.</p>
+
+<p><strong>What if I have issues with my payment?</strong><br>
+PayWise has a real WhatsApp support line. If anything goes wrong, there is a person on the other end who can help — not an automated bot.</p>
+
+            </div>
+          </div>
+
+          <!-- Image Suggestions -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-image">Image</span>
+              <span class="section-label">Banner Production Notes</span>
+              <span class="section-meta">For the design team — not pasted into WordPress</span>
+            </div>
+            <div class="image-suggest">
+              <div class="image-suggest-item">[Image suggestion: Split-screen showing the PayWise app on one side with the Island Finance biller selected, and a person relaxing on a couch on the other side — alt text: "PayWise app showing Island Finance payment option — pay your loan from your phone in 30 seconds"]</div>
+              <div class="image-suggest-item">[Image suggestion: Simple step diagram showing the 4-step flow — open app, select Island Finance, enter details, confirm — alt text: "Four-step guide to paying your Island Finance loan on PayWise"]</div>
+            </div>
+          </div>
+
+          <!-- QA Reference -->
+          <div class="qa-collapse">
+            <div class="qa-header" onclick="toggleQA(this)">
+              <span class="qa-toggle">▶</span>
+              <span class="section-badge badge-qa">QA</span>
+              <span class="section-label">Internal Links Used &amp; Notes</span>
+              <span class="section-meta">Agency reference — click to expand</span>
+            </div>
+            <div class="qa-content">
+              <h4>Internal Links Used</h4>
+              <ol>
+                <li><code>https://paywise.co/about</code> — linked from "licensed by the Central Bank of Trinidad and Tobago" (trust-signal anchor).</li>
+                <li><code>https://paywise.co/pay-bills-top-up</code> — linked from "full list of billers" (call-to-action for readers to see all billers).</li>
+                <li><code>https://paywise.co/fees</code> — linked in FAQ from "PayWise fees page" (pricing transparency).</li>
+              </ol>
+              <h4>Notes / Assumptions</h4>
+              <p>The step-by-step flow is based on general PayWise bill payment flow from the content plan and message block library. The specific in-app UI for Island Finance may vary — confirm against the live app before publishing.</p>
+              <p>"Payment posts immediately" and receipt-in-app details are based on general PayWise transaction descriptions. Confirm with product team that Island Finance payments post in real time.</p>
+              <p>WhatsApp support number is referenced generally rather than stated specifically. The actual number (868-723-8394) is in the message block library if desired.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══════════ BLOG 2 — BILL PAYMENT PAIN ═══════════ -->
+      <section class="blog-section" id="blog-2">
+        <div class="blog-header">
+          <span class="blog-toggle-icon">▼</span>
+          <h2>How Many Bills Are You Still Paying the Hard Way?</h2>
+          <span class="blog-meta">August 7 · Cash-Poor Bill Payers</span>
+        </div>
+        <div class="blog-body-wrap">
+
+          <!-- Banner Suggestion -->
+          <div class="banner-card">
+            <div class="banner-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); display: flex; align-items: center; justify-content: center; padding: 40px;">
+              <div style="text-align: center; color: rgba(255,255,255,0.85);">
+                <div style="font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: #69CE57; margin-bottom: 16px;">BANNER CONCEPT</div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
+                  <span style="font-size: 12px; font-weight: 700; color: #ef4444; background: rgba(239,68,68,0.15); padding: 6px 14px; border-radius: 6px;">45–85 MIN</span>
+                  <span style="font-size: 20px; color: var(--text-muted);">vs</span>
+                  <span style="font-size: 12px; font-weight: 700; color: #22c55e; background: rgba(34,197,94,0.15); padding: 6px 14px; border-radius: 6px;">30 SEC</span>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted); max-width: 480px; margin: 0 auto;">Use Carousel 3's split-panel comparison — payment queue still on one side vs. PayWise phone on the other, with time contrast as the hero.</div>
+              </div>
+            </div>
+            <div class="banner-overlay">
+              <div class="banner-label">Banner Suggestion</div>
+              <div class="banner-desc">Based on: Carousel 3 Slide 2 (Split Panel). Left: documentary payment queue. Right: PayWise phone + 30 sec badge. The time contrast carries the thesis.</div>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-seo">SEO</span>
+              <span class="section-label">Metadata</span>
+              <span class="section-meta">Yoast / RankMath fields — not pasted into post body</span>
+            </div>
+            <div class="md-grid">
+              <div class="md-field"><div class="md-field-label">SEO Title</div><div class="md-field-value">How Many Bills Are You Still Paying the Hard Way? PayWise Makes It Easier.</div></div>
+              <div class="md-field"><div class="md-field-label">Meta Description</div><div class="md-field-value">Pay every bill in 30 seconds — T&amp;TEC, WASA, Flow, Island Finance. No queues, no hidden fees, no stress. Licensed by the Central Bank of T&amp;T.</div></div>
+              <div class="md-field"><div class="md-field-label">URL Slug</div><div class="md-field-value"><code>/pay-bills-easy-way-paywise/</code></div></div>
+              <div class="md-field"><div class="md-field-label">Primary Keyword</div><div class="md-field-value">pay bills online Trinidad</div></div>
+              <div class="md-field"><div class="md-field-label">Secondary Keywords</div><div class="md-field-value">digital bill payment app, stop standing in payment lines, PayWise bill payment, pay T&amp;TEC online, pay WASA online</div></div>
+              <div class="md-field"><div class="md-field-label">Search Intent</div><div class="md-field-value">Informational — people frustrated with traditional bill payment who are looking for a better way.</div></div>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-body">Body</span>
+              <span class="section-label">Paste-ready post</span>
+              <span class="section-meta">H1 + H2s + CTA + FAQ — copy this into WordPress</span>
+              <button class="copy-btn" data-copy-target="post-2" aria-label="Copy post body">📋 Copy post</button>
+            </div>
+            <div class="post-body" id="post-2">
+
+<h1>How Many Bills Are You Still Paying the Hard Way? Here's the Easier Way.</h1>
+
+<p>Think about the last time you paid a bill. Did you leave your house? Stand in a line? Pay cash and hope the receipt did not get lost?</p>
+
+<p>There is a reason PayWise exists: paying bills in Trinidad should not be harder than buying a doubles.</p>
+
+<p>But for most people, it still is. Here is a look at what bill payment actually costs — and what happens when you switch to an app that was built for this.</p>
+
+<h2>The Bill You Paid Last Month — How Long Did It Take?</h2>
+
+<p>Let us walk through a typical bill payment trip.</p>
+
+<p>You leave your house. Drive or take transport to the payment centre — 15 to 30 minutes, depending on where you live. You find parking or you do not, and you walk in. You join the line — 10 to 20 minutes, sometimes more when it is end-of-month. You make the payment — 5 minutes. You travel back — another 15 to 30 minutes.</p>
+
+<p>Total: 45 to 85 minutes. For one bill.</p>
+
+<p>Now multiply that by the number of bills you pay each month. T&amp;TEC. WASA. Flow or Digicel. Maybe an Island Finance loan. If you pay four bills a month the old way, you are spending somewhere between 3 and 6 hours in transit and in lines. That is a full workday. Every month. Just to pay bills.</p>
+
+<p>That does not include the cash handling fees some agents charge, the cost of transport, or the lost time you could have spent doing literally anything else.</p>
+
+<h2>What PayWise Does Instead</h2>
+
+<p>PayWise puts every biller in one app. T&amp;TEC, WASA, Flow, Digicel, bMobile, Island Finance, and more. You open the app. You select the biller. You enter the amount. You confirm. Done.</p>
+
+<p>Each bill takes about 30 seconds.</p>
+
+<p>No travel. No waiting in a line. No paper receipts that end up crumpled in the bottom of your bag. The receipt is saved in the app, where you can find it again without searching through envelopes.</p>
+
+<p><a href="https://paywise.co/pay-bills-top-up">The full list of billers</a> is inside the app. If you pay it each month, chances are it is already there.</p>
+
+<h2>And Now: Island Finance Loans Too</h2>
+
+<p>The newest addition to PayWise's biller list is Island Finance. If you have a personal loan with Island Finance, you can now pay it the same way you pay your T&amp;TEC — 30 seconds, from the same app, with the same wallet.</p>
+
+<p>This makes PayWise the only app in Trinidad that covers both your utility bills and your loan payments in one place. No more running between a T&amp;TEC office and an Island Finance branch in the same afternoon. No more keeping track of two different payment methods.</p>
+
+<p>It all lives inside PayWise.</p>
+
+<h2>One App. 30 Seconds. Your Money, Your Way.</h2>
+
+<p>The math is straightforward. The old way costs you hours and transport money every month. PayWise costs you 30 seconds per bill.</p>
+
+<p>Download the app once. Add funds to your wallet. Every bill from then on takes less than a minute. And because PayWise is <a href="https://paywise.co/about">licensed by the Central Bank of Trinidad and Tobago</a>, your money is protected by the same regulator that oversees your bank. It is not a random startup. It is a regulated financial service.</p>
+
+<p>If you are still standing in payment lines, ask yourself whether that habit is worth the time it is costing you.</p>
+
+<hr>
+
+<div class="cta-box">
+<h3>Stop standing in lines. Start paying in seconds.</h3>
+<p>Download PayWise. Pick a biller. Pay your first bill in 30 seconds. You will wonder why you waited so long.</p>
+<a href="https://paywise.co/personal/">→ Download PayWise. Pay your first bill in 30 seconds.</a>
+</div>
+
+<h2>FAQ</h2>
+
+<p><strong>Which billers are available on PayWise?</strong><br>
+T&amp;TEC, WASA, Flow, Digicel, bMobile, Island Finance, and more. Open the app to see the current full list.</p>
+
+<p><strong>How do I add money to my PayWise wallet?</strong><br>
+You can link a bank account or load funds at any PayWise agent location. <a href="https://paywise.co/link-bank-accounts">Link your bank account</a> in the app to transfer money directly.</p>
+
+<p><strong>Is there a fee for paying bills through PayWise?</strong><br>
+See the <a href="https://paywise.co/fees">fees page</a> for current bill payment rates. Wallet-to-wallet transfers are free; bill payments have transparent pricing with no surprise charges.</p>
+
+<p><strong>What if a bill payment fails?</strong><br>
+Every failed transaction is logged and reversible. PayWise has a live WhatsApp support line — if something goes wrong, a real person helps you resolve it.</p>
+
+<p><strong>Do I need a smartphone to use PayWise?</strong><br>
+Yes, the app runs on smartphones. For family members who do not have one, there are PayWise agents across Trinidad who can process payments in person.</p>
+
+            </div>
+          </div>
+
+          <!-- Image Suggestions -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-image">Image</span>
+              <span class="section-label">Banner Production Notes</span>
+              <span class="section-meta">For the design team — not pasted into WordPress</span>
+            </div>
+            <div class="image-suggest">
+              <div class="image-suggest-item">[Image suggestion: A comparison graphic showing a clock reading "45–85 minutes" on one side (with bus/car icon and queue icon) vs "30 seconds" on the other side (with phone icon) — alt text: "Comparison of bill payment time: 45–85 minutes the old way vs 30 seconds on PayWise"]</div>
+              <div class="image-suggest-item">[Image suggestion: The PayWise app home screen showing multiple biller logos — T&amp;TEC, WASA, Flow, Island Finance — alt text: "PayWise app home screen showing all available billers in one place"]</div>
+            </div>
+          </div>
+
+          <!-- QA Reference -->
+          <div class="qa-collapse">
+            <div class="qa-header" onclick="toggleQA(this)">
+              <span class="qa-toggle">▶</span>
+              <span class="section-badge badge-qa">QA</span>
+              <span class="section-label">Internal Links Used &amp; Notes</span>
+              <span class="section-meta">Agency reference — click to expand</span>
+            </div>
+            <div class="qa-content">
+              <h4>Internal Links Used</h4>
+              <ol>
+                <li><code>https://paywise.co/pay-bills-top-up</code> — linked from "full list of billers" (readers see available billers).</li>
+                <li><code>https://paywise.co/about</code> — linked from "licensed by the Central Bank of Trinidad and Tobago" (trust signal).</li>
+                <li><code>https://paywise.co/link-bank-accounts</code> — linked in FAQ from "Link your bank account" (wallet funding).</li>
+                <li><code>https://paywise.co/fees</code> — linked in FAQ from "fees page" (pricing transparency).</li>
+              </ol>
+              <h4>Notes / Assumptions</h4>
+              <p>Time estimates (15–30 min travel, 10–20 min queue, 5 min transaction) are illustrative from the content plan, not researched averages. Flag for client to confirm before publishing.</p>
+              <p>"3–5 bills a month" is a general assumption based on typical T&amp;T household utilities. Verify if client has actual data.</p>
+              <p>FAQ descriptions are based on general PayWise product descriptions. Confirm against current app behavior.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══════════ BLOG 3 — CBTT LICENSE ═══════════ -->
+      <section class="blog-section" id="blog-3">
+        <div class="blog-header">
+          <span class="blog-toggle-icon">▼</span>
+          <h2>What It Means That PayWise Is Licensed by the Central Bank of T&amp;T</h2>
+          <span class="blog-meta">August 18 · Cash-Poor Bill Payers</span>
+        </div>
+        <div class="blog-body-wrap">
+
+          <!-- Banner Suggestion -->
+          <div class="banner-card">
+            <div class="banner-img" style="background: linear-gradient(135deg, #0d1a2e 0%, #04507F 100%); display: flex; align-items: center; justify-content: center; padding: 40px;">
+              <div style="text-align: center; color: rgba(255,255,255,0.85);">
+                <div style="font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .14em; color: #69CE57; margin-bottom: 16px;">BANNER CONCEPT</div>
+                <div style="margin-bottom: 14px;">
+                  <div style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #69CE57; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                    <span style="font-size: 32px; font-weight: 700; color: #69CE57;">CBTT</span>
+                  </div>
+                  <div style="font-size: 16px; font-weight: 700; color: #fff;">PayWise</div>
+                  <div style="font-size: 11px; color: var(--text-muted);">Licensed &amp; Regulated</div>
+                </div>
+                <div style="font-size: 13px; color: var(--text-muted); max-width: 480px; margin: 0 auto;">New composition: navy background, shield/seal-style CBTT badge in centre, PayWise wordmark below — authoritative, certificate-like.</div>
+              </div>
+            </div>
+            <div class="banner-overlay">
+              <div class="banner-label">Banner Suggestion</div>
+              <div class="banner-desc">New composition (no existing carousel covers regulation). Dark navy template D palette, shield-style CBTT badge, PayWise wordmark, green ring motif.</div>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-seo">SEO</span>
+              <span class="section-label">Metadata</span>
+              <span class="section-meta">Yoast / RankMath fields — not pasted into post body</span>
+            </div>
+            <div class="md-grid">
+              <div class="md-field"><div class="md-field-label">SEO Title</div><div class="md-field-value">PayWise Is CBTT-Licensed — What That Means for Your Money</div></div>
+              <div class="md-field"><div class="md-field-label">Meta Description</div><div class="md-field-value">PayWise is licensed by the Central Bank of Trinidad and Tobago. Here is what that means for your money — and why it matters more than any app feature.</div></div>
+              <div class="md-field"><div class="md-field-label">URL Slug</div><div class="md-field-value"><code>/paywise-cbtt-license-meaning/</code></div></div>
+              <div class="md-field"><div class="md-field-label">Primary Keyword</div><div class="md-field-value">PayWise CBTT licensed</div></div>
+              <div class="md-field"><div class="md-field-label">Secondary Keywords</div><div class="md-field-value">is PayWise safe, digital payment regulation Trinidad, Central Bank of T&amp;T license, regulated payment app, electronic money issuer Trinidad</div></div>
+              <div class="md-field"><div class="md-field-label">Search Intent</div><div class="md-field-value">Informational — people who have heard the CBTT license mentioned and want to understand what it really means for their money.</div></div>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-body">Body</span>
+              <span class="section-label">Paste-ready post</span>
+              <span class="section-meta">H1 + H2s + CTA + FAQ — copy this into WordPress</span>
+              <button class="copy-btn" data-copy-target="post-3" aria-label="Copy post body">📋 Copy post</button>
+            </div>
+            <div class="post-body" id="post-3">
+
+<h1>What It Means That PayWise Is Licensed by the Central Bank of Trinidad and Tobago</h1>
+
+<p>You hear it in every PayWise ad: "Licensed by the Central Bank of Trinidad and Tobago."</p>
+
+<p>But what does that actually mean for you and your money?</p>
+
+<p>It is not just a trust badge. It is a legal and regulatory framework that protects every transaction you make. Here is a clear breakdown of what the CBTT license means — and why it matters more than any feature on the app.</p>
+
+<h2>What the CBTT License Is</h2>
+
+<p>PayWise is registered as an Electronic Money Issuer with the Central Bank of Trinidad and Tobago. This is not a casual certification. It means PayWise operates under the same regulatory system that oversees banks in Trinidad.</p>
+
+<p>To hold this license, PayWise must meet specific requirements set by the Central Bank. It is subject to regular oversight. It follows rules about how customer funds are handled. And it is accountable to the same financial authority that regulates every other legitimate financial institution in the country.</p>
+
+<p>In plain language: PayWise is not a random app. It is a regulated financial service, supervised by Trinidad and Tobago's highest monetary authority.</p>
+
+<h2>What That Means for Your Money</h2>
+
+<p>Here is what the CBTT license actually does for you as a user:</p>
+
+<p><strong>Your money is protected.</strong> Customer wallet balances are held according to regulatory requirements. PayWise cannot use your funds for anything other than what you authorised — your money is your money, separate from the company's operating budget.</p>
+
+<p><strong>Every transaction is tracked.</strong> When you pay a bill, send money, or cash out at an agent, that transaction exists in an auditable system. If something ever needs to be checked — a payment that did not go through, a receipt that got lost — there is a record the regulator can verify.</p>
+
+<p><strong>You have recourse.</strong> Because PayWise is regulated, there is a formal channel if something goes wrong. You are not relying on a company's goodwill. You are protected by a regulatory framework designed to hold financial services accountable to their users.</p>
+
+<p><strong>The license is monitored.</strong> The CBTT does not issue licenses and walk away. It monitors regulated entities on an ongoing basis. PayWise must continue to meet the standards required to maintain its license — standards that exist to protect consumers.</p>
+
+<h2>Why This Matters in the Trinidad Market</h2>
+
+<p>Trinidad has seen too many stories about unregulated platforms freezing funds, disappearing, or failing to resolve disputes. The <a href="https://paywise.co/faqs">CBTT license</a> is the difference between a regulated financial service and an app with no accountability.</p>
+
+<p>This is particularly important for a market like T&amp;T, where word travels fast. One bad experience with an unregulated platform can turn an entire community away from digital payments. The CBTT license is your guarantee that PayWise is held to a standard — not just making promises on a website.</p>
+
+<p>When you pay your T&amp;TEC, your Island Finance loan, or your WASA bill on PayWise, the transaction passes through a Central Bank-regulated system. That is the same level of protection you get when you walk into a bank branch. It just happens to take 30 seconds from your phone instead of an hour from your Saturday.</p>
+
+<h2>Trust You Can Feel</h2>
+
+<p>The features on PayWise — paying bills, sending money, cashing out at an agent — are useful. But they rest on something more important: a foundation of trust backed by regulation.</p>
+
+<p>Every time you open the app and pay a bill, you are using a platform that is accountable to Trinidad's highest financial authority. That is the confidence that makes the app work. Not because the design is nice. Because your money is safe.</p>
+
+<p>If you have been hesitating to try a digital payment app because you are not sure which ones you can trust, <a href="https://paywise.co/about">start with the one that is licensed</a>. The CBTT badge is not just marketing. It is your protection.</p>
+
+<hr>
+
+<div class="cta-box">
+<h3>Your money deserves a regulated home.</h3>
+<p>Download PayWise. Licensed by the Central Bank of Trinidad and Tobago. Every transaction protected.</p>
+<a href="https://paywise.co/personal/">→ Download PayWise. Licensed by the Central Bank of T&amp;T.</a>
+</div>
+
+<h2>FAQ</h2>
+
+<p><strong>Is the CBTT license the same as being a bank?</strong><br>
+No. PayWise is an Electronic Money Issuer, not a bank. But it operates under the same regulator and must meet similar standards for customer fund protection and reporting.</p>
+
+<p><strong>How can I verify PayWise's CBTT license?</strong><br>
+The Central Bank of Trinidad and Tobago publishes a list of licensed financial institutions. You can check the CBTT website for the official registry of Electronic Money Issuers.</p>
+
+<p><strong>Does the CBTT license cover every transaction I make?</strong><br>
+Yes. All transactions processed through PayWise occur within the regulated system. This means every payment is tracked, auditable, and covered under the regulatory framework.</p>
+
+<p><strong>What happens if PayWise shuts down?</strong><br>
+Regulatory requirements for Electronic Money Issuers include provisions for customer fund protection. Because customer money is held separately from company funds, it remains accessible. This is a standard safeguard built into the licensing framework.</p>
+
+<p><strong>Are there other licensed payment apps in T&amp;T?</strong><br>
+A small number of providers hold CBTT licenses. PayWise is one of them. If you are comparing options, check whether the app you are considering is actually regulated — not all of them are.</p>
+
+            </div>
+          </div>
+
+          <!-- Image Suggestions -->
+          <div class="md-card">
+            <div class="md-card-header">
+              <span class="section-badge badge-image">Image</span>
+              <span class="section-label">Banner Production Notes</span>
+              <span class="section-meta">For the design team — not pasted into WordPress</span>
+            </div>
+            <div class="image-suggest">
+              <div class="image-suggest-item">[Image suggestion: A simple trust graphic showing a shield icon with the CBTT badge inside it and the PayWise logo beside it — alt text: "PayWise is licensed by the Central Bank of Trinidad and Tobago — your money is regulated and protected"]</div>
+              <div class="image-suggest-item">[Image suggestion: The PayWise app home screen with a subtle CBTT badge visible in the corner of the screen — alt text: "PayWise app showing the CBTT license badge — every transaction is regulated"]</div>
+            </div>
+          </div>
+
+          <!-- QA Reference -->
+          <div class="qa-collapse">
+            <div class="qa-header" onclick="toggleQA(this)">
+              <span class="qa-toggle">▶</span>
+              <span class="section-badge badge-qa">QA</span>
+              <span class="section-label">Internal Links Used &amp; Notes</span>
+              <span class="section-meta">Agency reference — click to expand</span>
+            </div>
+            <div class="qa-content">
+              <h4>Internal Links Used</h4>
+              <ol>
+                <li><code>https://paywise.co/faqs</code> — linked from "CBTT license" (FAQ page explains trust questions in more detail).</li>
+                <li><code>https://paywise.co/about</code> — linked from "start with the one that is licensed" (About page for regulatory/company background).</li>
+              </ol>
+              <h4>Notes / Assumptions</h4>
+              <p>"PayWise is registered as an Electronic Money Issuer with the CBTT" is consistently referenced across the message block library (Trust 2A, Obj 5A, Trust 2E) and buyer psychology report. Safe to use.</p>
+              <p>Specific claims about regulatory mechanics (funds held separately, auditable transactions, ongoing monitoring, regulatory recourse, shutdown provisions) are general descriptions of how EMI regulation typically works. The specific terms of PayWise's license may vary. Flag for compliance review before publishing.</p>
+              <p>FAQ answer about "other licensed payment apps" does not name competitors. Deliberately general.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>PayWise · Blog Posts · July/August 2026 · Confidential</p>
+        <p style="margin-top: 2px; opacity: 0.6;">3 posts · Grade 6–8 reading level · CBTT license in every post · Brand voice guardrails enforced</p>
+      </footer>
+
+    </div>
+  </main>
+
+</div>
+
+<script>
+(function() {
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  themeToggle.addEventListener('click', function() {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeToggle.textContent = isDark ? '☀️' : '🌙';
+  });
+
+  // Sidebar hamburger
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  document.getElementById('sidebarToggle').addEventListener('click', function() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+  });
+  document.getElementById('sidebarClose').addEventListener('click', function() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  });
+  overlay.addEventListener('click', function() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  });
+
+  // Collapsible blog sections
+  document.querySelectorAll('.blog-header').forEach(function(header) {
+    header.addEventListener('click', function() {
+      this.closest('.blog-section').classList.toggle('collapsed');
+    });
+  });
+
+  // QA toggle (click to expand)
+  function toggleQA(el) {
+    const content = el.nextElementSibling;
+    const toggle = el.querySelector('.qa-toggle');
+    content.classList.toggle('open');
+    toggle.textContent = content.classList.contains('open') ? '▼' : '▶';
+  }
+  window.toggleQA = toggleQA;
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn[data-copy-target]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const targetId = this.getAttribute('data-copy-target');
+      const el = document.getElementById(targetId);
+      let text;
+      if (el) {
+        text = el.innerText || el.textContent;
+      }
+      if (text) {
+        navigator.clipboard.writeText(text).then(function() {
+          const original = btn.innerHTML;
+          btn.innerHTML = '✓ Copied';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.innerHTML = original;
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(function() {
+          // fallback
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          const original = btn.innerHTML;
+          btn.innerHTML = '✓ Copied';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.innerHTML = original;
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      }
+    });
+  });
+
+  // Active sidebar link on scroll
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.sidebar-link').forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-50% 0px -50% 0px' });
+
+  document.querySelectorAll('.blog-section').forEach(function(section) {
+    observer.observe(section);
+  });
+
+  // Sidebar link clicks close on mobile
+  document.querySelectorAll('.sidebar-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  });
+})();
+</script>
+</body>
+</html>

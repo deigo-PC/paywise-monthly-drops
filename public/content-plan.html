@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayWise — Content Plan — July 21 — August 31, 2026</title>
+<style>
+  :root {
+    --bg: #000000;
+    --surface: #2a2a2a;
+    --surface-2: #222222;
+    --text: #ffffff;
+    --text-muted: #9ca3af;
+    --text-soft: #cccccc;
+    --border: #3a3a3a;
+    --accent: #3b82f6;
+    --accent-soft: #1e3a5f;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --radius: .75rem;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --sidebar-w: 240px;
+    --top-offset: 0px;
+  }
+
+  [data-theme="light"] {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --surface-2: #f1efe9;
+    --text: #1a1a1a;
+    --text-muted: #5a5a5a;
+    --text-soft: #333333;
+    --border: #e3e1dc;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --success: #16a34a;
+    --warning: #d97706;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.6;
+    transition: background .2s, color .2s;
+  }
+
+  .app-layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 0;
+    z-index: 50;
+    transition: transform .25s ease;
+  }
+
+  .sidebar-inner {
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar-brand {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-close {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background .12s, color .12s;
+  }
+
+  .sidebar-link:hover {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  .sidebar-link.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .sidebar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 4px 12px;
+  }
+
+  .main-content {
+    min-width: 0;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 49;
+  }
+
+  .sidebar-overlay.open { display: block; }
+
+  .header {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .hamburger {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 10px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .hamburger:hover { background: var(--surface-2); }
+
+  .header-top h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    flex: 1;
+  }
+
+  .theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 12px;
+    line-height: 1;
+    transition: background .15s;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover { background: var(--surface-2); }
+
+  .header-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .header-editorial {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    max-width: 720px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h2 .count {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  .persona-key { margin-bottom: 48px; }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .persona-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+
+  .persona-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    color: var(--accent);
+  }
+
+  .persona-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .count-check {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .count-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .count-item .check { color: var(--success); font-weight: 700; }
+  .count-item .label { color: var(--text-muted); }
+  .count-item .num { color: var(--text); font-weight: 600; }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    align-items: center;
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .search-wrap .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px 8px 34px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: var(--font);
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+    outline: none;
+  }
+
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .toolbar-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 12px;
+    font-family: var(--font);
+    padding: 6px 12px;
+    transition: background .1s, color .1s;
+  }
+
+  .toolbar-btn:hover {
+    background: var(--border);
+    color: var(--text);
+  }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background .1s, border-color .1s, color .1s;
+    font-family: var(--font);
+  }
+
+  .filter-chip:hover {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .filter-chip.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .filter-chip .chip-count {
+    font-size: 10px;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+
+  .filter-chip.active .chip-count { color: var(--accent); }
+
+  .week-section {
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color .15s;
+  }
+
+  .week-section:hover { border-color: #555; }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .1s;
+  }
+
+  .week-header:hover { background: var(--surface-2); }
+
+  .week-header h2 {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .week-header .week-theme {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+    flex: 1;
+  }
+
+  .week-toggle-icon {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: transform .15s;
+    flex-shrink: 0;
+  }
+
+  .week-section.collapsed .week-toggle-icon {
+    transform: rotate(-90deg);
+  }
+
+  .week-section.collapsed .deliverable-grid {
+    display: none;
+  }
+
+  .deliverable-grid {
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 0;
+  }
+
+  .week-count {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 0 12px;
+  }
+
+  .deliverable-card {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    transition: background .1s;
+  }
+
+  .deliverable-card:last-child { border-bottom: none; }
+
+  .deliverable-card.hidden {
+    display: none;
+  }
+
+  .deliverable-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .1s;
+  }
+
+  .deliverable-header:hover { background: var(--surface-2); }
+
+  .deliverable-header-left {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .deliverable-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .deliverable-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .deliverable-persona {
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+
+  .deliverable-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .card-toggle-icon {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform .15s;
+    flex-shrink: 0;
+  }
+
+  .deliverable-card.expanded .card-toggle-icon {
+    transform: rotate(90deg);
+  }
+
+  .deliverable-body-wrap {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .deliverable-card.expanded .deliverable-body-wrap {
+    display: block;
+  }
+
+  .deliverable-body {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .deliverable-body p { margin-bottom: 8px; }
+  .deliverable-body strong { color: var(--text); }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .client-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    background: rgba(34, 197, 94, 0.12);
+    color: var(--success);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .psyc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    background: rgba(245, 158, 11, 0.12);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .design-brief {
+    margin: 0 20px 16px;
+    padding: 12px 16px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .design-brief strong { color: var(--text-soft); }
+
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px 12px;
+    gap: 8px;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 11px;
+    font-family: var(--font);
+    padding: 5px 10px;
+    transition: background .1s, color .1s;
+  }
+
+  .copy-btn:hover {
+    background: var(--border);
+    color: var(--text);
+  }
+
+  .copy-btn.copied {
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .no-results.show { display: block; }
+
+  .calendar-section { margin-bottom: 48px; }
+
+  .table-wrap { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border);
+  }
+
+  table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-soft);
+  }
+
+  table tr:hover td { background: var(--surface-2); }
+
+  .analytics-section { margin-bottom: 48px; }
+  .analytics-section .table-wrap { margin-bottom: 24px; }
+
+  .analytics-section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .scroll-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s, visibility .2s, background .1s;
+    z-index: 30;
+  }
+
+  .scroll-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .scroll-top:hover {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+
+  .footer {
+    margin-top: 64px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .app-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      width: 280px;
+      z-index: 50;
+      border-right: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .sidebar.open { transform: translateX(0); }
+
+    .sidebar-close { display: block; }
+    .hamburger { display: block; }
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 20px 12px 48px; }
+    .persona-grid { grid-template-columns: 1fr; }
+    .header-top h1 { font-size: 22px; }
+    .week-header { padding: 12px 14px; }
+    .deliverable-header { padding: 12px 14px; }
+    .deliverable-body { padding: 12px 14px; }
+    .design-brief { margin: 0 14px 12px; }
+    .card-actions { padding: 0 14px 10px; }
+    .toolbar { padding: 12px; }
+    .search-wrap { min-width: 140px; }
+  }
+
+  @media print {
+    body { background: #ffffff; color: #000000; }
+    .sidebar, .hamburger, .scroll-top, .theme-toggle, .toolbar,
+    .copy-btn, .card-toggle-icon, .week-toggle-icon { display: none !important; }
+    .app-layout { display: block; }
+    .container { max-width: 100%; padding: 0; }
+    .deliverable-card { border: 1px solid #ccc; break-inside: avoid; page-break-inside: avoid; }
+    .deliverable-body-wrap { display: block !important; }
+    .week-section { break-inside: avoid; page-break-inside: avoid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="sidebar-brand">
+        <span>PayWise</span>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Close navigation">✕</button>
+      </div>
+      <nav class="sidebar-nav" id="sidebarNav">
+        <a href="#persona-key" class="sidebar-link" data-section="persona-key">Personas</a>
+        <div class="sidebar-group" id="sidebarWeeksGroup">
+          <span class="sidebar-label">Weeks</span>
+          <div id="sidebarWeeksLinks">
+            <a href="#week-1" class="sidebar-link" data-section="week-1">Week 1 — Island Finance Launch</a>
+            <a href="#week-2" class="sidebar-link" data-section="week-2">Week 2 — Cash-Out Your Wallet</a>
+            <a href="#week-3" class="sidebar-link" data-section="week-3">Week 3 — Bills Made Simple</a>
+            <a href="#week-4" class="sidebar-link" data-section="week-4">Week 4 — For Your Business</a>
+            <a href="#week-5" class="sidebar-link" data-section="week-5">Week 5 — Trust & Community</a>
+            <a href="#week-6" class="sidebar-link" data-section="week-6">Week 6 — Month in Review</a>
+          </div>
+        </div>
+        <a href="#calendar" class="sidebar-link" data-section="calendar">Calendar</a>
+        <a href="#analytics" class="sidebar-link" data-section="analytics">Analytics</a>
+      </nav>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <main class="main-content">
+    <div class="container">
+
+      <header class="header">
+        <div class="header-top">
+          <button class="hamburger" id="sidebarToggle" aria-label="Open navigation">☰</button>
+          <h1>PayWise — Content Plan</h1>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        </div>
+        <p class="header-sub">July 21 — August 31, 2026 · English (Trinidadian)</p>
+        <p class="header-editorial"><strong>Narrative:</strong> July/August tells the story of expansion — more ways to use your money on PayWise. The Island Finance partnership proves PayWise is becoming the comprehensive bill payment hub for Trinidad. The Cash-Out feature closes the loop between digital and physical money. Every piece reinforces that PayWise is the only app you need for your money.<br><strong>Persona targeting:</strong> Cash-Poor Bill Payers (60%), Sale-Losing Operators (25%), All Clusters (15%)<br><strong>Language:</strong> Trinidadian peer-to-peer vernacular. Short, punchy, real talk. No jargon. Every piece carries the CBTT license trust signal. CTAs use → + URL format.</p>
+      </header>
+
+      <section class="persona-key" id="persona-key">
+        <h2>Persona Key</h2>
+        <div class="persona-grid">
+          <div class="persona-card">
+            <h3>💰 Cash-Poor Bill Payers</h3>
+            <p>Adults 18–55; wants speed, security, ease. Main trigger: bill urgency moment (T&TEC due, Island Finance loan due).</p>
+          </div>
+          <div class="persona-card">
+            <h3>🏪 Sale-Losing Operators</h3>
+            <p>Business owners 25–50; losing cash-only sales. Main trigger: lost sale from cash-only; customer asks for card.</p>
+          </div>
+          <div class="persona-card">
+            <h3>👥 All Clusters</h3>
+            <p>Mixed audience — month review / big announcements. Main trigger: brand awareness, trust, community.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="count-check">
+        <span class="count-item"><span class="check">✅</span><span class="label">Carousels:</span><span class="num">7 / 7</span></span>
+        <span class="count-item"><span class="check">✅</span><span class="label">Blog Posts:</span><span class="num">3 / 3</span></span>
+        <span class="count-item"><span class="check">✅</span><span class="label">Emails:</span><span class="num">3 / 3</span></span>
+        <span class="count-item"><span class="check">✅</span><span class="label">Social Posts:</span><span class="num">6 / 6</span></span>
+        <span class="count-item"><span class="check">✅</span><span class="label">Video Scripts:</span><span class="num">1 / 1</span></span>
+        <span class="count-item"><span class="check">✅</span><span class="label">Infographics:</span><span class="num">2 / 2</span></span>
+        <span class="count-item"><span class="check">✅</span><span class="label">Push Notifications:</span><span class="num">3 / 3</span></span>
+      </div>
+
+      <div class="toolbar" id="toolbar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search deliverables..." autocomplete="off">
+        </div>
+        <div class="toolbar-actions">
+          <button class="toolbar-btn" id="expandAllWeeks">Expand all</button>
+          <button class="toolbar-btn" id="collapseAllWeeks">Collapse all</button>
+        </div>
+        <div class="filter-bar" id="filterBar"></div>
+      </div>
+
+      <div id="week-1" class="week-section">
+        <div class="week-header">
+          <span class="week-toggle-icon">▼</span>
+          <h2>Week 1 — July 21–27</h2>
+          <span class="week-theme">Island Finance Launch</span>
+        </div>
+        <div class="deliverable-grid">
+
+          <div class="deliverable-card" data-type="Carousel" data-persona="Cash-Poor Bill Payers" data-week="1">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Carousel</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Island Finance</span>
+                    <span class="psyc-badge">Social Proof</span>
+                    <span class="psyc-badge">Authority</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Island Finance — Now on PayWise</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>OBJECTIVE</strong>
+Announce the Island Finance partnership and show that loan payments are now possible inside PayWise — 30 seconds, from your phone.
+
+<strong>SLIDE COPY (text-on-image)</strong>
+Slide 1: Your Island Finance loan payment just got easier. No payment lines. No branch visit.
+Slide 2: Open PayWise. Select Island Finance. Enter your loan details. Confirm. Done.
+Slide 3: Licensed by the Central Bank of Trinidad and Tobago. Your payment is safe and tracked.
+Slide 4: Pay your loan in 30 seconds. → [paywise.co/personal/]
+
+<strong>CAPTION</strong>
+Big news 🇹🇹 You can now pay your Island Finance loan directly on PayWise. No branch. No queue. No running around. Open the app, select Island Finance, and pay in 30 seconds. Licensed by the Central Bank of T&T. → Download PayWise and pay your loan today: [paywise.co/personal/]</div>
+              <div class="design-brief"><strong>DESIGN BRIEF</strong>
+Color palette: Green (#69CE57) + Blue (#1B92CE) primary. Dark (#141414) for backgrounds.
+Typography: Poppins (headlines + body). Kalam (accent phrases if needed).
+Image style: Brand color background with ring motif. Iconography showing PayWise + Island Finance logos side by side.
+Logo placement: Island Finance logo prominently on slides 1 and 2 — must be sourced from client. PayWise logo on all slides (bottom right / corner).
+Special note: Island Finance logo must be included in the design per client request.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Social Post" data-persona="Cash-Poor Bill Payers" data-week="1">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Social Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Island Finance</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Island Finance Announcement</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>COPY</strong>
+Your Island Finance loan payment just moved to your phone.
+
+PayWise now accepts Island Finance payments. Open the app → Select Island Finance → Enter your details → Confirm. 30 seconds. No branch. No queue. Licensed by the Central Bank of T&T.
+
+Your Money, Your Way.
+
+→ Pay your Island Finance loan today: [paywise.co/personal/]
+
+<strong>ASSETS NEEDED</strong>
+Single image graphic: "Island Finance — Now on PayWise" with both logos, green/blue brand background with ring motif.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Blog Post" data-persona="Cash-Poor Bill Payers" data-week="1">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📝 Blog Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Island Finance</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">You Can Now Pay Your Island Finance Loan on PayWise — Here's How</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>META DESCRIPTION</strong>
+Your Island Finance loan payment is now just 30 seconds away. PayWise accepts Island Finance payments — no branch, no queue, no hassle. Licensed by the Central Bank of T&T.
+
+<strong>INTRO PARAGRAPH</strong>
+If you have an Island Finance loan, you know the routine — heading to a branch, standing in a payment line, or finding an agent to process the payment. That routine just changed. PayWise now accepts Island Finance payments directly in the app: 30 seconds, from your phone, anywhere in Trinidad.
+
+<strong>BLOG STRUCTURE</strong>
+
+H2: One More Biller, One Less Trip
+PayWise already lets you pay T&TEC, WASA, Flow, Digicel, bMobile, and more. Island Finance is the latest addition — bringing loan payments into the app. This means everything from your utility bills to your personal loan can now be managed in one place, from one wallet.
+
+H2: How to Pay Your Island Finance Loan in 30 Seconds
+Step-by-step — Open PayWise → Tap "Pay Bill" → Select "Island Finance" → Enter your loan details (account number or ID) → Enter amount → Confirm. The payment posts immediately. You get a receipt in the app and via email/SMS.
+
+H2: Why This Matters for Trinidadians
+Most loan payment options involve travel, wait times, or cash handling fees. PayWise eliminates all of that. And since PayWise is licensed by the Central Bank of Trinidad and Tobago, every payment is regulated, tracked, and protected.
+
+H2: What's Next for PayWise Billers
+Tease the roadmap — Cash-Out feature, more billers coming, business tools expanding. PayWise is building the full-stack financial platform for T&T.
+
+CTA: → Download PayWise. Pay your Island Finance loan in 30 seconds: [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Push Notification" data-persona="All" data-week="1">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">🔔 Push Notification</span>
+                  <span class="deliverable-persona">👤 All</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Island Finance</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Push Notification — Paired with Blog 1</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>PUSH NOTIFICATION (paired with Blog 1)</strong>
+
+You can now pay your Island Finance loan on PayWise — 30 seconds, no branch. → [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Social Post" data-persona="Cash-Poor Bill Payers" data-week="1">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Social Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Island Finance</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">How to Pay Island Finance in 30 Seconds</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>COPY</strong>
+Step 1: Open PayWise.
+Step 2: Tap "Pay Bill."
+Step 3: Select Island Finance.
+Step 4: Enter your loan details.
+Step 5: Confirm.
+
+Done. Your loan payment is posted in 30 seconds. No branch. No queue. No paperwork.
+
+Licensed by the Central Bank of T&T. Your Money, Your Way.
+
+→ Pay your Island Finance loan now: [paywise.co/personal/]
+
+<strong>ASSETS NEEDED</strong>
+Single image graphic showing a simplified 4-step flow with icons + Island Finance logo + PayWise branding.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="week-2" class="week-section">
+        <div class="week-header">
+          <span class="week-toggle-icon">▼</span>
+          <h2>Week 2 — July 28–Aug 3</h2>
+          <span class="week-theme">Cash-Out Your Wallet</span>
+        </div>
+        <div class="deliverable-grid">
+
+          <div class="deliverable-card" data-type="Carousel" data-persona="Cash-Poor Bill Payers" data-week="2">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Carousel</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Cash-Out</span>
+                    <span class="psyc-badge">Loss Aversion</span>
+                    <span class="psyc-badge">Control</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Cash-Out — Your Wallet, Your Cash</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>OBJECTIVE</strong>
+Announce the Cash-Out feature — users can withdraw physical cash from their PayWise wallet at any agent location. Show the simplicity and convenience.
+
+<strong>SLIDE COPY (text-on-image)</strong>
+Slide 1: Your money is in your PayWise wallet. But what if you need physical cash?
+Slide 2: Cash-Out lets you withdraw cash at any PayWise agent. No ATM. No bank fee.
+Slide 3: Show your PayWise QR. The agent hands you cash. It's that simple.
+Slide 4: Cash in your wallet. Cash in your hand. → [paywise.co/agents/]
+
+<strong>CAPTION</strong>
+Need cash? Your PayWise wallet isn't just for digital payments anymore. Cash-Out lets you withdraw physical cash at any PayWise agent in Trinidad. Walk in, show your QR, walk out with cash. No ATM. No extra fees. Licensed by the Central Bank of T&T. → Cash out your wallet today: [paywise.co/agents/]</div>
+              <div class="design-brief"><strong>DESIGN BRIEF</strong>
+Color palette: Green (#69CE57) + Blue (#1B92CE) primary. Dark (#141414) backgrounds where contrast is needed.
+Typography: Poppins. Kalam for accent phrases like "Your Money, Your Way."
+Image style: Use PayWise app screenshot showing the Cash-Out option in the wallet screen. Overlay with agent storefront imagery if available.
+Logo placement: PayWise logo on all slides.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Email" data-persona="All" data-week="2">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📧 Email</span>
+                  <span class="deliverable-persona">👤 All</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Island Finance</span>
+                    <span class="client-badge">🆕 Cash-Out</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Big News — Island Finance & Cash-Out Now Live</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>SUBJECT LINE</strong>
+Two big updates: Island Finance & Cash-Out now live
+
+<strong>PREVIEW TEXT</strong>
+Pay your loan AND get cash from your wallet. All in one app.
+
+<strong>EMAIL BODY</strong>
+Hi [First Name],
+
+Big month for PayWise. Two things you need to know:
+
+<strong>1. Island Finance is now on PayWise</strong>
+You can pay your Island Finance loan directly from the app. Open PayWise → Select Island Finance → Enter your details → Confirm. 30 seconds. No branch. Licensed by the Central Bank of T&T.
+
+<strong>2. Cash-Out is live</strong>
+Need physical cash? Withdraw money from your PayWise wallet at any PayWise agent location. Show your QR code, get your cash. No ATM fee. No minimum.
+
+Pay your bills. Withdraw your cash. Manage everything from one app.
+
+→ Download PayWise: [paywise.co/personal/]
+→ Learn about Cash-Out: [paywise.co/agents/]
+
+Your Money, Your Way.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Social Post" data-persona="Cash-Poor Bill Payers" data-week="2">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Social Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="client-badge">🆕 Cash-Out</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Cash-Out — Walk Into Any Agent</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>COPY</strong>
+Need cash? Don't run to an ATM.
+
+Cash-Out is live on PayWise. Walk into any PayWise agent, show your PayWise QR code, and get physical cash from your wallet. That's it. No bank card. No ATM fees. Just your money, in your hand.
+
+Licensed by the Central Bank of T&T. Your Money, Your Way.
+
+→ Cash out today: [paywise.co/agents/]
+
+<strong>ASSETS NEEDED</strong>
+Single image: Phone screen showing the Cash-Out feature in the PayWise app + agent storefront iconography.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="week-3" class="week-section">
+        <div class="week-header">
+          <span class="week-toggle-icon">▼</span>
+          <h2>Week 3 — Aug 4–10</h2>
+          <span class="week-theme">Bills Made Simple</span>
+        </div>
+        <div class="deliverable-grid">
+
+          <div class="deliverable-card" data-type="Carousel" data-persona="Cash-Poor Bill Payers" data-week="3">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Carousel</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="psyc-badge">Loss Aversion</span>
+                    <span class="psyc-badge">Social Norm</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Still Standing in Payment Lines in 2026?</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>OBJECTIVE</strong>
+Make payment lines feel absurd in 2026 and position PayWise as the obvious alternative.
+
+<strong>SLIDE COPY (text-on-image)</strong>
+Slide 1: It's 2026. You have a phone. Why are you still standing in a payment line?
+Slide 2: T&TEC? 30 seconds. WASA? 30 seconds. Island Finance? 30 seconds. All of them.
+Slide 3: Licensed by the Central Bank of T&T. Your money never disappears into a random app.
+Slide 4: Pay every bill from your phone. → [paywise.co/personal/]
+
+<strong>CAPTION</strong>
+It's 2026. You have a smartphone. You have the PayWise app. Why are you still standing in payment lines? T&TEC, WASA, Flow, Island Finance — all of them take 30 seconds from your phone. Licensed by the Central Bank of T&T. Your Saturday > payment line. → Download PayWise: [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Blog Post" data-persona="Cash-Poor Bill Payers" data-week="3">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📝 Blog Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                </div>
+                <div class="deliverable-title">How Many Bills Are You Still Paying the Hard Way?</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>META DESCRIPTION</strong>
+From T&TEC to Island Finance loans, PayWise lets you pay every bill in 30 seconds from your phone. No queues, no hidden fees, no stress. Licensed by the Central Bank of T&T.
+
+<strong>INTRO PARAGRAPH</strong>
+Think about the last time you paid a bill. Did you leave your house? Stand in a line? Pay cash and hope the receipt didn't get lost? There's a reason PayWise exists: paying bills in Trinidad should not be harder than buying a doubles.
+
+<strong>BLOG STRUCTURE</strong>
+
+H2: The Bill You Paid Last Month — How Long Did It Take?
+Break down the real time cost — travel to the payment centre (15-30 min), standing in line (10-20 min), transaction time (5 min), travel back (15-30 min). Total: 45-85 minutes for one bill. Now multiply by 3-5 bills a month.
+
+H2: What PayWise Does Instead
+One app. All your billers — T&TEC, WASA, Flow, Digicel, bMobile, Island Finance, and more. 30 seconds per bill. No travel. No queue. Just open, select, confirm, done. Receipt saved in the app.
+
+H2: And Now: Island Finance Loans Too
+The newest addition to PayWise's biller list. If you have an Island Finance loan, you can now pay it in the app — no branch visit needed. This makes PayWise the only app covering utilities AND loan payments in one place.
+
+H2: One App. 30 Seconds. Your Money, Your Way.
+Download the app once. Every bill from then on takes 30 seconds. The math speaks for itself.
+
+CTA: → Download PayWise. Pay your first bill in 30 seconds: [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Push Notification" data-persona="All" data-week="3">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📔 Push Notification</span>
+                  <span class="deliverable-persona">👤 —</span>
+                </div>
+                <div class="deliverable-title">Push Notification — Paired with Blog 2</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>PUSH NOTIFICATION (paired with Blog 2)</strong>
+
+Still standing in payment lines? Pay T&TEC, WASA, Island Finance — all in 30 seconds from your phone. → [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Carousel" data-persona="Cash-Poor Bill Payers" data-week="3">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Carousel</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="psyc-badge">Convenience</span>
+                    <span class="psyc-badge">Authority</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">One App for All Your Bills</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>OBJECTIVE</strong>
+Show the range of billers available in PayWise and make the consolidation argument: one app replaces all the individual payment methods.
+
+<strong>SLIDE COPY (text-on-image)</strong>
+Slide 1: How many places do you go to pay your bills? T&TEC office. WASA office. Flow. The loan branch.
+Slide 2: Or: one app. T&TEC. WASA. Flow. Digicel. Island Finance. All in PayWise.
+Slide 3: One login. One wallet. One receipt for everything. Licensed by the Central Bank of T&T.
+Slide 4: Download PayWise. One app. All your bills. → [paywise.co/personal/]
+
+<strong>CAPTION</strong>
+T&TEC. WASA. Flow. Digicel. Island Finance. How many of these do you pay every month? And how many different places do you go to pay them? PayWise puts them all in one app. 30 seconds per bill. One receipt. Licensed by the Central Bank of T&T. → Download PayWise and simplify your bills: [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="week-4" class="week-section">
+        <div class="week-header">
+          <span class="week-toggle-icon">▼</span>
+          <h2>Week 4 — Aug 11–17</h2>
+          <span class="week-theme">For Your Business</span>
+        </div>
+        <div class="deliverable-grid">
+
+          <div class="deliverable-card" data-type="Carousel" data-persona="Sale-Losing Operators" data-week="4">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Carousel</span>
+                  <span class="deliverable-persona">👤 Sale-Losing Operators</span>
+                  <span class="badge-row">
+                    <span class="psyc-badge">Loss Aversion</span>
+                    <span class="psyc-badge">Social Proof</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">"You Take Card?" — Now You Do</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>OBJECTIVE</strong>
+Make business owners feel the pain of every lost card sale and show PayWise as the instant fix.
+
+<strong>SLIDE COPY (text-on-image)</strong>
+Slide 1: "You take card?" — you've heard this. Every time you say no, that's a sale walking out.
+Slide 2: PayWise for Business. No POS machine. No bank contract. No minimum spend.
+Slide 3: Customer scans your QR code. You get paid. Money in your bank next business day.
+Slide 4: Start accepting card payments from your phone. → [paywise.co/business]
+
+<strong>CAPTION</strong>
+"You take card?" If you're a business owner in Trinidad, you've heard this question. And every time you say no, a sale walks out. PayWise for Business fixes that. No POS machine. No bank contract. No minimum. Your customer scans your QR code. You get paid. Money in your bank account next business day. This isn't PayPal — this was built for T&T. → Start accepting card payments today: [paywise.co/business]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Email" data-persona="Sale-Losing Operators" data-week="4">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📧 Email</span>
+                  <span class="deliverable-persona">👤 Sale-Losing Operators</span>
+                </div>
+                <div class="deliverable-title">Never Lose a Sale Again</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>SUBJECT LINE</strong>
+Start accepting card payments today — no POS machine needed
+
+<strong>PREVIEW TEXT</strong>
+Your customers are asking. Here's how to say yes.
+
+<strong>EMAIL BODY</strong>
+Hi [First Name],
+
+A customer walks into your shop. They pick up what they want. Then comes the question: "Do you take card?"
+
+If you've ever had to say no, you know the feeling. The sale you worked for — walking out the door.
+
+PayWise for Business changes that. Here's how simple it is:
+
+1. Download PayWise for Business
+2. Generate your QR code
+3. Customer scans and pays with their card
+4. Money hits your bank account next business day
+
+No POS machine. No bank contract. No minimum spend. Just more sales.
+
+→ Start accepting card payments: [paywise.co/business]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Social Post" data-persona="Sale-Losing Operators" data-week="4">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Social Post</span>
+                  <span class="deliverable-persona">👤 Sale-Losing Operators</span>
+                </div>
+                <div class="deliverable-title">No POS Machine Needed</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>COPY</strong>
+You don't need a POS machine to accept card payments.
+
+Download PayWise for Business. Generate a QR code. Let your customers scan and pay. Money lands in your bank account next business day.
+
+No contract. No minimum. No hardware. Just sales you used to lose.
+
+→ [paywise.co/business]
+
+<strong>ASSETS NEEDED</strong>
+Single image: "No POS Machine Needed" headline, phone showing QR payment screen, PayWise branding.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="week-5" class="week-section">
+        <div class="week-header">
+          <span class="week-toggle-icon">▼</span>
+          <h2>Week 5 — Aug 18–24</h2>
+          <span class="week-theme">Trust & Community</span>
+        </div>
+        <div class="deliverable-grid">
+
+          <div class="deliverable-card" data-type="Blog Post" data-persona="Cash-Poor Bill Payers" data-week="5">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📝 Blog Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                </div>
+                <div class="deliverable-title">What It Means to Be Licensed by the Central Bank of T&T</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>META DESCRIPTION</strong>
+PayWise is licensed by the Central Bank of Trinidad and Tobago. Here's what that actually means for your money — and why it matters more than any feature.
+
+<strong>INTRO PARAGRAPH</strong>
+You hear it in every PayWise ad: "Licensed by the Central Bank of Trinidad and Tobago." But what does that actually mean for you and your money? It's not just a trust badge — it's a legal and regulatory framework that protects every transaction you make.
+
+<strong>BLOG STRUCTURE</strong>
+
+H2: The CBTT License — What It Is
+PayWise is registered as an Electronic Money Issuer with the Central Bank of Trinidad and Tobago. This means PayWise is subject to regulatory oversight, capital requirements, and regular audits. Your funds are not sitting in some unregulated startup account — they are held under CBTT supervision.
+
+H2: What That Means for Your Money
+(1) Your wallet balance is ring-fenced — PayWise cannot use customer funds for operational expenses. (2) Every transaction is tracked and auditable. (3) You have regulatory recourse if something goes wrong. (4) The CBTT can step in if consumer protection standards are not met.
+
+H2: Why This Matters in the T&T Market
+T&T has seen too many stories of unregulated platforms freezing funds, disappearing, or failing to resolve disputes. The CBTT license is not just a marketing line — it's the difference between a regulated financial service and a random app. Every bill you pay, every loan payment, every cash-out is protected by this framework.
+
+H2: Trust You Can Feel
+When you pay your T&TEC, Island Finance loan, or WASA bill on PayWise, you're not just using a convenient app. You're using a platform that's accountable to Trinidad's highest financial authority. That's the confidence that makes the app work.
+
+CTA: → Download PayWise. Licensed by the Central Bank of T&T: [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Push Notification" data-persona="All" data-week="5">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📔 Push Notification</span>
+                  <span class="deliverable-persona">👤 —</span>
+                </div>
+                <div class="deliverable-title">Push Notification — Paired with Blog 3</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>PUSH NOTIFICATION (paired with Blog 3)</strong>
+
+PayWise is licensed by the Central Bank of T&T. Here's why that matters for your money. → [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Carousel" data-persona="Cash-Poor Bill Payers" data-week="5">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Carousel</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                  <span class="badge-row">
+                    <span class="psyc-badge">Social Proof</span>
+                    <span class="psyc-badge">Belonging</span>
+                  </span>
+                </div>
+                <div class="deliverable-title">Real People. Real Bills. Real Easy.</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>OBJECTIVE</strong>
+Use real (or realistic) testimonials to show everyday Trinidadians using PayWise for different needs — bills, loans, cash.
+
+<strong>SLIDE COPY (text-on-image)</strong>
+Slide 1: "I used to spend Saturday mornings in payment lines. Now I do it in 30 seconds on PayWise." — Marissa, Port of Spain
+Slide 2: "My customers can finally pay by card. I stopped losing sales on the spot." — Derek, San Fernando
+Slide 3: "I pay my Island Finance loan on PayWise now. No branch. No queue. Just 30 seconds." — Keisha, Arima
+Slide 4: Join thousands of T&T users. Get PayWise. → [paywise.co/personal/]
+
+<strong>CAPTION</strong>
+Real people, real bills, real easy. Marissa pays her T&TEC in 30 seconds. Derek accepts card payments at his shop. Keisha pays her Island Finance loan from her phone. Thousands of Trinidadians are already using PayWise. Licensed by the Central Bank of T&T. → Join them: [paywise.co/personal/]</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Email" data-persona="All" data-week="5">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📧 Email</span>
+                  <span class="deliverable-persona">👤 All</span>
+                </div>
+                <div class="deliverable-title">August Check-In</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>SUBJECT LINE</strong>
+August check-in — here's everything new on PayWise
+
+<strong>PREVIEW TEXT</strong>
+Island Finance, Cash-Out, and more. Your monthly update.
+
+<strong>EMAIL BODY</strong>
+Hi [First Name],
+
+August was packed. Here's what happened on PayWise:
+
+<strong>📌 Island Finance — Now Accepted</strong>
+Pay your Island Finance loan directly in the app. 30 seconds. No branch. Just another biller added to your one-stop payment hub.
+
+<strong>💵 Cash-Out — Live Now</strong>
+Need physical cash? Withdraw from your PayWise wallet at any agent location. Walk in, show your QR, walk out with cash.
+
+<strong>✅ Every Bill, One App</strong>
+T&TEC, WASA, Flow, Digicel, Island Finance, and more. One login. One wallet. 30 seconds per bill.
+
+September is going to be even bigger. If you haven't downloaded PayWise yet, now's the time.
+
+→ Download PayWise: [paywise.co/personal/]
+→ Learn about Cash-Out: [paywise.co/agents/]
+
+Your Money, Your Way.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="week-6" class="week-section">
+        <div class="week-header">
+          <span class="week-toggle-icon">▼</span>
+          <h2>Week 6 — Aug 25–31</h2>
+          <span class="week-theme">Month in Review</span>
+        </div>
+        <div class="deliverable-grid">
+
+          <div class="deliverable-card" data-type="Social Post" data-persona="All" data-week="6">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Social Post</span>
+                  <span class="deliverable-persona">👤 All</span>
+                </div>
+                <div class="deliverable-title">August Recap</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>COPY</strong>
+August was big.
+
+🇹🇹 Island Finance loans — now on PayWise
+💵 Cash-Out — walk into any agent, get your cash
+📱 Every bill — T&TEC, WASA, Flow, Digicel — 30 seconds
+
+September is coming. Don't start it the same way. Download PayWise.
+
+Your Money, Your Way. → [paywise.co/personal/]
+
+<strong>ASSETS NEEDED</strong>
+Single image recap graphic: 3 key highlights (Island Finance, Cash-Out, All Bills) with icons, PayWise branding.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Video" data-persona="Cash-Poor Bill Payers" data-week="6">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">🎬 Video Script</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                </div>
+                <div class="deliverable-title">How to Use PayWise — Island Finance + Cash-Out Walkthrough</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>FORMAT</strong> Short-form (45–60 seconds) | Screen recording + voiceover (AI avatar or real narration)
+
+<strong>SCRIPT</strong>
+
+[0–5s] Visual: Hero shot — PayWise app icon, then zoom into app.
+Audio: "Did you know you can pay your Island Finance loan on PayWise? And get cash from your wallet?"
+
+[5–15s] Visual: Screen recording — Open PayWise → Tap "Pay Bill" → Select Island Finance.
+Audio: "Open the app. Tap Pay Bill. Select Island Finance. Enter your loan details."
+
+[15–25s] Visual: Confirm payment → Receipt screen.
+Audio: "Confirm. Done. Receipt saved. No branch. No queue. No paperwork."
+
+[25–35s] Visual: Navigate to Cash-Out screen → Show QR code.
+Audio: "Need cash? Hit Cash-Out. Walk into any PayWise agent. Show this QR code."
+
+[35–45s] Visual: Agent handing cash → PayWise logo with CBTT badge.
+Audio: "Get your cash. Simple. Licensed by the Central Bank of T&T — your money is safe."
+
+[45–55s] Visual: CTA screen — Download on Google Play / App Store.
+Audio: "Island Finance payments. Cash-Out. Every bill you pay. One app. Your Money, Your Way."
+
+<strong>VISUAL NOTES</strong>
+- Use clean screen recordings from the PayWise app
+- Add brand ring overlay on hero shots
+- Highlight the Island Finance and Cash-Out options with a green callout box on screen
+- End card: PayWise logo + "Download on Google Play / App Store"</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Infographic" data-persona="All" data-week="6">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📊 Infographic</span>
+                  <span class="deliverable-persona">👤 All</span>
+                </div>
+                <div class="deliverable-title">September Bill Calendar</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>CONCEPT</strong>
+A clean monthly calendar showing key bill due dates for September. Helps users plan ahead and avoid late fees. Each biller is color-coded with its logo. The PayWise app is positioned as the single place to pay all of them.
+
+<strong>KEY SECTIONS / DATA POINTS</strong>
+- September 2026 calendar grid
+- T&TEC due dates flagged
+- WASA billing cycle noted
+- Flow / Digicel typical billing windows
+- Island Finance loan payment dates
+- Key: "Pay all of these in 30 seconds on PayWise"
+- CBTT license badge
+
+<strong>COPY DIRECTION</strong>
+Helpful, practical, neutral tone — this is a utility piece. "Know your dates. Pay in 30 seconds. Your Money, Your Way."</div>
+              <div class="design-brief"><strong>DESIGN BRIEF</strong>
+Color palette: Green + Blue primary. Neutral/light background for calendar grid.
+Typography: Poppins (calendar dates + headers). Kalam for accent tagline.
+Visualization style: Clean calendar layout with biller logos on due date markers. Ring motif as background element.
+Logo placement: PayWise logo top-right, CBTT badge bottom-left.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Social Post" data-persona="Cash-Poor Bill Payers" data-week="6">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📱 Social Post</span>
+                  <span class="deliverable-persona">👤 Cash-Poor Bill Payers</span>
+                </div>
+                <div class="deliverable-title">End-of-Month Reminder</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>COPY</strong>
+End of the month reminder.
+
+Your T&TEC is probably due. Your WASA too. And if you have an Island Finance loan — that's due as well.
+
+Pay them all in one place. 30 seconds each. PayWise. No queue. No late fee stress. Licensed by the Central Bank of T&T.
+
+→ Pay your bills now: [paywise.co/personal/]
+
+<strong>ASSETS NEEDED</strong>
+Single image: End-of-month reminder graphic with biller logos (T&TEC, WASA, Island Finance, Flow) and PayWise branding.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="deliverable-card" data-type="Infographic" data-persona="All" data-week="6">
+            <div class="deliverable-header">
+              <span class="card-toggle-icon">▶</span>
+              <div class="deliverable-header-left">
+                <div class="deliverable-meta">
+                  <span class="deliverable-type">📊 Infographic</span>
+                  <span class="deliverable-persona">👤 All</span>
+                </div>
+                <div class="deliverable-title">PayWise at a Glance — Fees, Features, Benefits</div>
+              </div>
+            </div>
+            <div class="deliverable-body-wrap">
+              <div class="deliverable-body"><strong>CONCEPT</strong>
+A quick-reference visual that summarises everything PayWise offers — all billers, Cash-Out, business tools, fees, and trust credentials. Designed to be saved and shared.
+
+<strong>KEY SECTIONS / DATA POINTS</strong>
+- Billers: T&TEC, WASA, Flow, Digicel, bMobile, Island Finance +
+- Features: Bill Payment (30 seconds), Cash-Out (at any agent), P2P Transfer (FREE), Merchant QR (next-day settlement)
+- Fees: Wallet-to-wallet FREE, Bank transfer out $2.00, Card transaction 3.5% + $3.00
+- Trust: Licensed by the Central Bank of Trinidad and Tobago
+- Tagline: Your Money, Your Way
+
+<strong>COPY DIRECTION</strong>
+Informational, comprehensive, confident. "Everything you need to know about PayWise in one place. Your Money, Your Way."</div>
+              <div class="design-brief"><strong>DESIGN BRIEF</strong>
+Color palette: Green/blue brand colors. Dark (#141414) header section for contrast.
+Typography: Poppins throughout. Kalam for "Your Money, Your Way" tagline.
+Visualization style: Card-style layout with iconography. Three sections: Bills, Features, Trust.
+Logo placement: PayWise logo top-center. CBTT badge in trust section.</div>
+              <div class="card-actions">
+                <button class="copy-btn">📋 Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="no-results" id="noResults">
+        No deliverables match your search or filter.
+      </div>
+
+      <section class="calendar-section" id="calendar">
+        <h2>Content Calendar — July 21 — August 31, 2026</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Format</th>
+                <th>Topic / Headline</th>
+                <th>Target Persona</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Jul 21</td><td>Carousel</td><td>Island Finance — Now on PayWise 🆕</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Jul 21</td><td>Social Post</td><td>Island Finance Announcement 🆕</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Jul 24</td><td>Blog Post</td><td>You Can Now Pay Your Island Finance Loan on PayWise 🆕</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Jul 24</td><td>Push Notification</td><td>Paired with Blog 1</td><td>—</td></tr>
+              <tr><td>Jul 27</td><td>Social Post</td><td>How to Pay Island Finance in 30 Seconds 🆕</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Jul 28</td><td>Carousel</td><td>Cash-Out — Your Wallet, Your Cash 🆕</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Jul 31</td><td>Email</td><td>Big News — Island Finance & Cash-Out Now Live</td><td>All</td></tr>
+              <tr><td>Aug 3</td><td>Social Post</td><td>Cash-Out — Walk Into Any Agent 🆕</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 4</td><td>Carousel</td><td>Still Standing in Payment Lines in 2026?</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 7</td><td>Blog Post</td><td>How Many Bills Are You Still Paying the Hard Way?</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 7</td><td>Push Notification</td><td>Paired with Blog 2</td><td>—</td></tr>
+              <tr><td>Aug 10</td><td>Carousel</td><td>One App for All Your Bills</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 11</td><td>Carousel</td><td>"You Take Card?" — Now You Do</td><td>Sale-Losing Operators</td></tr>
+              <tr><td>Aug 14</td><td>Email</td><td>Never Lose a Sale Again</td><td>Sale-Losing Operators</td></tr>
+              <tr><td>Aug 17</td><td>Social Post</td><td>No POS Machine Needed</td><td>Sale-Losing Operators</td></tr>
+              <tr><td>Aug 18</td><td>Blog Post</td><td>What It Means to Be Licensed by the Central Bank of T&T</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 18</td><td>Push Notification</td><td>Paired with Blog 3</td><td>—</td></tr>
+              <tr><td>Aug 21</td><td>Carousel</td><td>Real People, Real Bills, Real Easy</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 24</td><td>Email</td><td>August Check-In</td><td>All</td></tr>
+              <tr><td>Aug 25</td><td>Social Post</td><td>August Recap</td><td>All</td></tr>
+              <tr><td>Aug 28</td><td>Video Script</td><td>How to Use PayWise — Island Finance + Cash-Out Walkthrough</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 31</td><td>Infographic</td><td>September Bill Calendar</td><td>All</td></tr>
+              <tr><td>Aug 31</td><td>Social Post</td><td>End-of-Month Reminder</td><td>Cash-Poor Bill Payers</td></tr>
+              <tr><td>Aug 31</td><td>Infographic</td><td>PayWise at a Glance</td><td>All</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="analytics-section" id="analytics">
+        <h2>Analytics & Tracking</h2>
+
+        <h3>UTM Strategy</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Content</th>
+                <th>URL</th>
+                <th>utm_source</th>
+                <th>utm_medium</th>
+                <th>utm_campaign</th>
+                <th>utm_content</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Carousel 1 (IF launch)</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>island-finance-launch</td><td>carousel-1-if</td></tr>
+              <tr><td>Carousel 1 (IF launch)</td><td>paywise.co/personal/</td><td>facebook</td><td>social</td><td>island-finance-launch</td><td>carousel-1-if</td></tr>
+              <tr><td>Social Post 1 (IF)</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>island-finance-launch</td><td>social-1-if</td></tr>
+              <tr><td>Social Post 1 (IF)</td><td>paywise.co/personal/</td><td>linkedin</td><td>social</td><td>island-finance-launch</td><td>social-1-if-li</td></tr>
+              <tr><td>Blog 1 (IF)</td><td>paywise.co/personal/</td><td>website</td><td>blog</td><td>island-finance-launch</td><td>blog-1-if</td></tr>
+              <tr><td>Push 1</td><td>paywise.co/personal/</td><td>push</td><td>notification</td><td>island-finance-launch</td><td>push-1-if</td></tr>
+              <tr><td>Social Post 2 (IF)</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>island-finance-launch</td><td>social-2-if</td></tr>
+              <tr><td>Carousel 2 (Cash-Out)</td><td>paywise.co/agents/</td><td>instagram</td><td>social</td><td>cash-out-launch</td><td>carousel-2-co</td></tr>
+              <tr><td>Email 1</td><td>paywise.co/personal/</td><td>email</td><td>newsletter</td><td>aug-announcement</td><td>email-1-combined</td></tr>
+              <tr><td>Social Post 3 (Cash-Out)</td><td>paywise.co/agents/</td><td>instagram</td><td>social</td><td>cash-out-launch</td><td>social-3-co</td></tr>
+              <tr><td>Carousel 3</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>bills-made-simple</td><td>carousel-3</td></tr>
+              <tr><td>Blog 2</td><td>paywise.co/personal/</td><td>website</td><td>blog</td><td>bills-made-simple</td><td>blog-2</td></tr>
+              <tr><td>Carousel 4</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>one-app-bills</td><td>carousel-4</td></tr>
+              <tr><td>Carousel 5</td><td>paywise.co/business</td><td>instagram</td><td>social</td><td>business-tools</td><td>carousel-5</td></tr>
+              <tr><td>Email 2</td><td>paywise.co/business</td><td>email</td><td>newsletter</td><td>business-tools</td><td>email-2</td></tr>
+              <tr><td>Social Post 4</td><td>paywise.co/business</td><td>instagram</td><td>social</td><td>business-tools</td><td>social-4</td></tr>
+              <tr><td>Blog 3</td><td>paywise.co/personal/</td><td>website</td><td>blog</td><td>trust-credibility</td><td>blog-3</td></tr>
+              <tr><td>Carousel 6</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>trust-community</td><td>carousel-6</td></tr>
+              <tr><td>Email 3</td><td>paywise.co/personal/</td><td>email</td><td>newsletter</td><td>august-wrap</td><td>email-3</td></tr>
+              <tr><td>Social Post 5</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>august-review</td><td>social-5</td></tr>
+              <tr><td>Video</td><td>paywise.co/personal/</td><td>youtube</td><td>video</td><td>island-finance-plus-cash-out</td><td>video-1</td></tr>
+              <tr><td>Infographic 1</td><td>paywise.co/personal/</td><td>website</td><td>infographic</td><td>bill-calendar</td><td>infographic-1</td></tr>
+              <tr><td>Social Post 6</td><td>paywise.co/personal/</td><td>instagram</td><td>social</td><td>month-end-reminder</td><td>social-6</td></tr>
+              <tr><td>Infographic 2</td><td>paywise.co/personal/</td><td>website</td><td>infographic</td><td>paywise-at-a-glance</td><td>infographic-2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Events to Track</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Trigger</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>signup_completed</td><td>User completes registration</td><td>Acquisition</td></tr>
+              <tr><td>first_bill_paid</td><td>User pays first bill (including Island Finance)</td><td>Activation</td></tr>
+              <tr><td>island_finance_payment</td><td>User selects Island Finance biller</td><td>Activation — Partnership</td></tr>
+              <tr><td>cash_out_initiated</td><td>User navigates to Cash-Out screen</td><td>Feature Adoption</td></tr>
+              <tr><td>cash_out_completed</td><td>User completes cash withdrawal at agent</td><td>Revenue</td></tr>
+              <tr><td>blog_view</td><td>User views blog post</td><td>Engagement</td></tr>
+              <tr><td>carousel_view</td><td>User views carousel on social</td><td>Engagement</td></tr>
+              <tr><td>cta_click</td><td>User clicks CTA link</td><td>Conversion</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Conversion Goals</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Goal</th>
+                <th>Definition</th>
+                <th>Content Types</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Island Finance signups</td><td>Users who pay Island Finance loan after seeing IF content</td><td>Carousel 1, Social 1 & 2, Blog 1</td></tr>
+              <tr><td>Cash-Out activations</td><td>Users who complete a cash-out after seeing Cash-Out content</td><td>Carousel 2, Social 3, Video</td></tr>
+              <tr><td>General signups</td><td>New app downloads + first bill payment</td><td>Carousels 3, 4, 6; Blogs 2, 3; Emails</td></tr>
+              <tr><td>Business conversions</td><td>Business account signups + first card transaction</td><td>Carousel 5, Email 2, Social 4</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Generated by Content Plan Generator v2 · July 8, 2026</p>
+      </footer>
+
+    </div>
+  </main>
+
+</div>
+
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<script>
+(function() {
+
+  // ── THEME ──
+  const STORAGE_KEY = 'content-plan-theme';
+
+  function getPreferredTheme() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'light' || stored === 'dark') return stored;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    return 'dark';
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    localStorage.setItem(STORAGE_KEY, next);
+  }
+
+  setTheme(getPreferredTheme());
+
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(e) {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      setTheme(e.matches ? 'light' : 'dark');
+    }
+  });
+
+  // ── SIDEBAR TOGGLE (mobile) ──
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (sidebarToggle) sidebarToggle.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+  // ── SIDEBAR SCROLL-SPY ──
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+  function updateActiveLink() {
+    let currentId = '';
+    const sections = document.querySelectorAll('section[id], [id="toolbar"], [id^="week-"], [id="persona-key"]');
+    const scrollPos = window.scrollY + 100;
+
+    sections.forEach(function(section) {
+      if (section.offsetTop <= scrollPos) {
+        currentId = section.id;
+      }
+    });
+
+    sidebarLinks.forEach(function(link) {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === currentId) {
+        link.classList.add('active');
+      }
+      if (link.getAttribute('href') === '#' + currentId) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  window.addEventListener('load', updateActiveLink);
+
+  // ── WEEK COLLAPSE/EXPAND ──
+  document.querySelectorAll('.week-header').forEach(function(header) {
+    header.addEventListener('click', function(e) {
+      var section = this.closest('.week-section');
+      if (section) {
+        section.classList.toggle('collapsed');
+      }
+    });
+  });
+
+  // ── EXPAND / COLLAPSE ALL WEEKS ──
+  var expandBtn = document.getElementById('expandAllWeeks');
+  var collapseBtn = document.getElementById('collapseAllWeeks');
+
+  if (expandBtn) {
+    expandBtn.addEventListener('click', function() {
+      document.querySelectorAll('.week-section').forEach(function(s) { s.classList.remove('collapsed'); });
+    });
+  }
+
+  if (collapseBtn) {
+    collapseBtn.addEventListener('click', function() {
+      document.querySelectorAll('.week-section').forEach(function(s) { s.classList.add('collapsed'); });
+    });
+  }
+
+  // ── COLLAPSE ALL WEEKS ON LOAD (start collapsed) ──
+  window.addEventListener('load', function() {
+    document.querySelectorAll('.week-section').forEach(function(s) { s.classList.add('collapsed'); });
+  });
+
+  // ── DELIVERABLE CARD EXPAND/COLLAPSE ──
+  document.addEventListener('click', function(e) {
+    var header = e.target.closest('.deliverable-header');
+    if (header) {
+      var card = header.closest('.deliverable-card');
+      if (card) {
+        card.classList.toggle('expanded');
+      }
+    }
+  });
+
+  // ── COPY TO CLIPBOARD ──
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+
+    var card = btn.closest('.deliverable-card');
+    if (!card) return;
+
+    var bodyEl = card.querySelector('.deliverable-body');
+    var titleEl = card.querySelector('.deliverable-title');
+    if (!bodyEl) return;
+
+    var text = '';
+    if (titleEl) text += titleEl.textContent.trim() + '\n\n';
+    text += bodyEl.textContent.trim();
+
+    navigator.clipboard.writeText(text).then(function() {
+      btn.classList.add('copied');
+      var origText = btn.textContent;
+      btn.textContent = '✓ Copied';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.textContent = origText;
+      }, 1500);
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = '✓ Copied';
+      setTimeout(function() { btn.textContent = '📋 Copy'; }, 1500);
+    });
+  });
+
+  // ── FILTER CHIPS ──
+  var filterBar = document.getElementById('filterBar');
+  var searchInput = document.getElementById('searchInput');
+  var noResults = document.getElementById('noResults');
+
+  var activeType = null;
+  var activePersona = null;
+
+  function rebuildFilterChips() {
+    var cards = document.querySelectorAll('.deliverable-card');
+    var types = new Set();
+    var personas = new Set();
+
+    cards.forEach(function(card) {
+      var t = card.getAttribute('data-type');
+      var p = card.getAttribute('data-persona');
+      if (t) types.add(t);
+      if (p) personas.add(p);
+    });
+
+    var chips = [];
+
+    chips.push('<button class="filter-chip active" data-filter="all" data-filter-type="all">All <span class="chip-count">' + cards.length + '</span></button>');
+
+    types.forEach(function(type) {
+      var count = 0;
+      cards.forEach(function(c) { if (c.getAttribute('data-type') === type) count++; });
+      var activeAttr = (activeType === type && !activePersona) ? ' active' : '';
+      chips.push('<button class="filter-chip' + activeAttr + '" data-filter="type" data-filter-value="' + type.replace(/"/g, '&quot;') + '">' + type + ' <span class="chip-count">' + count + '</span></button>');
+    });
+
+    personas.forEach(function(p) {
+      var count = 0;
+      cards.forEach(function(c) { if (c.getAttribute('data-persona') === p) count++; });
+      var activeAttr = (activePersona === p && !activeType) ? ' active' : '';
+      chips.push('<button class="filter-chip' + activeAttr + '" data-filter="persona" data-filter-value="' + p.replace(/"/g, '&quot;') + '">' + p + ' <span class="chip-count">' + count + '</span></button>');
+    });
+
+    filterBar.innerHTML = chips.join('');
+  }
+
+  filterBar.addEventListener('click', function(e) {
+    var chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+
+    var filterType = chip.getAttribute('data-filter');
+    var filterValue = chip.getAttribute('data-filter-value');
+
+    if (filterType === 'all') {
+      activeType = null;
+      activePersona = null;
+    } else if (filterType === 'type') {
+      activeType = (activeType === filterValue) ? null : filterValue;
+      activePersona = null;
+    } else if (filterType === 'persona') {
+      activePersona = (activePersona === filterValue) ? null : filterValue;
+      activeType = null;
+    }
+
+    applyFilters();
+    rebuildFilterChips();
+  });
+
+  function applyFilters() {
+    var cards = document.querySelectorAll('.deliverable-card');
+    var searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    var anyVisible = false;
+
+    cards.forEach(function(card) {
+      var match = true;
+
+      if (activeType) {
+        if (card.getAttribute('data-type') !== activeType) match = false;
+      }
+
+      if (activePersona) {
+        if (card.getAttribute('data-persona') !== activePersona) match = false;
+      }
+
+      if (match && searchVal) {
+        var text = card.textContent.toLowerCase();
+        if (text.indexOf(searchVal) === -1) match = false;
+      }
+
+      card.classList.toggle('hidden', !match);
+      if (match) anyVisible = true;
+    });
+
+    document.querySelectorAll('.week-section').forEach(function(week) {
+      var visibleCards = week.querySelectorAll('.deliverable-card:not(.hidden)');
+      week.style.display = (visibleCards.length === 0 && (activeType || activePersona || searchVal)) ? 'none' : '';
+    });
+
+    if (noResults) {
+      noResults.classList.toggle('show', !anyVisible);
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      applyFilters();
+      rebuildFilterChips();
+    });
+  }
+
+  // ── SCROLL-TO-TOP ──
+  var scrollTopBtn = document.getElementById('scrollTop');
+  var scrollThreshold = window.innerHeight;
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > scrollThreshold) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ── INIT ──
+  window.addEventListener('load', function() {
+    rebuildFilterChips();
+    updateActiveLink();
+  });
+
+})();
+</script>
+
+</body>
+</html>
