@@ -49,6 +49,7 @@ import single1 from "@/assets/paywise/singles/single-1.png";
 import single2 from "@/assets/paywise/singles/single-2.png";
 import single2Story from "@/assets/paywise/singles/single-2-story.png";
 import single3 from "@/assets/paywise/singles/single-3.png";
+import single4 from "@/assets/paywise/singles/single-4.png";
 
 export type CarouselItem = {
   id: number;
@@ -257,6 +258,12 @@ export const standalone: StandaloneItem[] = [
     id: 3,
     title: "Standalone Post 3",
     image: single3,
+    story: undefined,
+  },
+  {
+    id: 4,
+    title: "Standalone Post 4",
+    image: single4,
     story: undefined,
   },
 ];
