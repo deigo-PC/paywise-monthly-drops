@@ -1,4 +1,5 @@
 import c1s0 from "@/assets/paywise/carousels/c1/slide-0.png";
+import c1s1 from "@/assets/paywise/carousels/c1/slide-1.png";
 
 import c2s0 from "@/assets/paywise/carousels/c2/slide-0.png";
 import c2s1 from "@/assets/paywise/carousels/c2/slide-1.png";
@@ -47,6 +48,7 @@ import email3Story from "@/assets/paywise/newsletters/email3-story.png";
 import single1 from "@/assets/paywise/singles/single-1.png";
 import single2 from "@/assets/paywise/singles/single-2.png";
 import single2Story from "@/assets/paywise/singles/single-2-story.png";
+import single3 from "@/assets/paywise/singles/single-3.png";
 
 export type CarouselItem = {
   id: number;
@@ -89,7 +91,7 @@ export const carousels: CarouselItem[] = [
     id: 1,
     title: "Island Finance — Now on PayWise",
     caption: "Big news 🇹🇹 You can now pay your Island Finance loan directly on PayWise. No branch. No queue. No running around. Open the app, select Island Finance, and pay in 30 seconds. Licensed by the Central Bank of T&T.",
-    slides: [c1s0],
+    slides: [c1s0, c1s1],
   },
   {
     id: 2,
@@ -250,6 +252,12 @@ export const standalone: StandaloneItem[] = [
     title: "Standalone Post 2",
     image: single2,
     story: single2Story,
+  },
+  {
+    id: 3,
+    title: "Standalone Post 3",
+    image: single3,
+    story: undefined,
   },
 ];
 

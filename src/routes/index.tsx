@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Monthly content drop preview for PayWise: 6 carousels, 3 blog posts, 3 newsletters and 2 standalone posts.",
+          "Monthly content drop preview for PayWise: 8 carousels, 3 blog posts, 3 newsletters and 3 standalone posts.",
       },
     ],
   }),
@@ -76,7 +76,7 @@ function Index() {
         </h1>
         <p className="mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
           A quick walk-through of everything going out this month: the Instagram grid as it will
-          look at month-end, the 8 carousels, 3 blog posts, 3 newsletters and 2 standalone posts — each with its
+          look at month-end, the 8 carousels, 3 blog posts, 3 newsletters and 3 standalone posts — each with its
           companion story.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -137,6 +137,30 @@ function Index() {
               </button>
             );
           })}
+          {standalone.map((s) => (
+            <button
+              key={`s-${s.id}`}
+              type="button"
+              onClick={() =>
+                s.image &&
+                setLightbox({
+                  src: s.image,
+                  alt: s.title,
+                  aspect: "post",
+                  downloadFilename: `paywise-standalone-${s.id}.png`,
+                })
+              }
+              className="group relative block"
+            >
+              <ImageOrPlaceholder
+                src={s.image}
+                alt={s.title}
+                aspect="post"
+                label={`S${s.id}`}
+                downloadFilename={`paywise-standalone-${s.id}.png`}
+              />
+            </button>
+          ))}
         </div>
       </Section>
 
