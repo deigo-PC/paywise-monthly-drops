@@ -20,16 +20,12 @@ import c5s2 from "@/assets/paywise/carousels/c5/slide-2.png";
 import c6s0 from "@/assets/paywise/carousels/c6/slide-0.png";
 import c6s1 from "@/assets/paywise/carousels/c6/slide-1.png";
 import c6s2 from "@/assets/paywise/carousels/c6/slide-2.png";
+import c6s3 from "@/assets/paywise/carousels/c6/slide-3.png";
 
 import c7s0 from "@/assets/paywise/carousels/c7/slide-0.png";
 import c7s1 from "@/assets/paywise/carousels/c7/slide-1.png";
 import c7s2 from "@/assets/paywise/carousels/c7/slide-2.png";
 import c7s3 from "@/assets/paywise/carousels/c7/slide-3.png";
-
-import c8s0 from "@/assets/paywise/carousels/c8/slide-0.png";
-import c8s1 from "@/assets/paywise/carousels/c8/slide-1.png";
-import c8s2 from "@/assets/paywise/carousels/c8/slide-2.png";
-import c8s3 from "@/assets/paywise/carousels/c8/slide-3.png";
 
 import blog1Banner from "@/assets/paywise/blogs/blog1-banner.png";
 import blog1Story from "@/assets/paywise/blogs/blog1-story.png";
@@ -96,45 +92,39 @@ export const carousels: CarouselItem[] = [
   },
   {
     id: 2,
-    title: "Cash-Out — Your Wallet, Your Cash",
-    caption: "Need cash? Your PayWise wallet isn't just for digital payments anymore. Cash-Out lets you withdraw physical cash at any PayWise agent in Trinidad. Walk in, show your QR, walk out with cash. No ATM. No extra fees. Licensed by the Central Bank of T&T.",
+    title: "Still Standing in Payment Lines in 2026?",
+    caption: "It's 2026. You have a smartphone. You have the PayWise app. Why are you still standing in payment lines? T&TEC, WASA, Flow, Island Finance — all of them take 30 seconds from your phone. Licensed by the Central Bank of T&T. Your Saturday > payment line.",
     slides: [c2s0, c2s1, c2s2],
   },
   {
     id: 3,
-    title: "Still Standing in Payment Lines in 2026?",
-    caption: "It's 2026. You have a smartphone. You have the PayWise app. Why are you still standing in payment lines? T&TEC, WASA, Flow, Island Finance — all of them take 30 seconds from your phone. Licensed by the Central Bank of T&T. Your Saturday > payment line.",
+    title: "One App for All Your Bills",
+    caption: "T&TEC. WASA. Flow. Digicel. Island Finance. How many of these do you pay every month? And how many different places do you go to pay them? PayWise puts them all in one app. 30 seconds per bill. One receipt. Licensed by the Central Bank of T&T.",
     slides: [c3s0, c3s1, c3s2],
   },
   {
     id: 4,
-    title: "One App for All Your Bills",
-    caption: "T&TEC. WASA. Flow. Digicel. Island Finance. How many of these do you pay every month? And how many different places do you go to pay them? PayWise puts them all in one app. 30 seconds per bill. One receipt. Licensed by the Central Bank of T&T.",
+    title: "\"You Take Card?\" — Now You Do",
+    caption: "\"You take card?\" If you're a business owner in Trinidad, you've heard this question. And every time you say no, a sale walks out. PayWise for Business fixes that. No POS machine. No bank contract. No minimum. Your customer scans your QR code. You get paid. Money in your bank account next business day.",
     slides: [c4s0, c4s1, c4s2],
   },
   {
     id: 5,
-    title: "\"You Take Card?\" — Now You Do",
-    caption: "\"You take card?\" If you're a business owner in Trinidad, you've heard this question. And every time you say no, a sale walks out. PayWise for Business fixes that. No POS machine. No bank contract. No minimum. Your customer scans your QR code. You get paid. Money in your bank account next business day.",
+    title: "Real People. Real Bills. Real Easy.",
+    caption: "Real people, real bills, real easy. Marissa pays her T&TEC in 30 seconds. Derek accepts card payments at his shop. Keisha pays her Island Finance loan from her phone. Thousands of Trinidadians are already using PayWise. Licensed by the Central Bank of T&T.",
     slides: [c5s0, c5s1, c5s2],
   },
   {
     id: 6,
-    title: "Real People. Real Bills. Real Easy.",
-    caption: "Real people, real bills, real easy. Marissa pays her T&TEC in 30 seconds. Derek accepts card payments at his shop. Keisha pays her Island Finance loan from her phone. Thousands of Trinidadians are already using PayWise. Licensed by the Central Bank of T&T.",
-    slides: [c6s0, c6s1, c6s2],
+    title: "Mid-Year Bill Reset — Stop Paying to Pay Your Bills",
+    caption: "Mid-year is the perfect time to check yourself. How much did you spend last month just paying your bills? Bank fees, bus fare, data. With PayWise, you pay your T&TEC in 30 seconds. No queue. No more waiting. Licensed by the Central Bank of T&T.",
+    slides: [c6s0, c6s1, c6s2, c6s3],
   },
   {
     id: 7,
-    title: "Mid-Year Bill Reset — Stop Paying to Pay Your Bills",
-    caption: "Mid-year is the perfect time to check yourself. How much did you spend last month just paying your bills? Bank fees, bus fare, data. With PayWise, you pay your T&TEC in 30 seconds. No queue. No more waiting. Licensed by the Central Bank of T&T.",
-    slides: [c7s0, c7s1, c7s2, c7s3],
-  },
-  {
-    id: 8,
     title: "You Left Home to Pay a Bill?",
     caption: "You left home. To pay a bill. In 2026. Let that sink in. PayWise takes 30 seconds. T&TEC. WASA. Flow. Digicel. All of them. Licensed by the Central Bank of T&T. Your Money, Your Way.",
-    slides: [c8s0, c8s1, c8s2, c8s3],
+    slides: [c7s0, c7s1, c7s2, c7s3],
   },
 ];
 
